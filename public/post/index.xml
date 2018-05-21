@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>Basics of GitHub through commandline</title>
-      <link>/2018/05/18/basics-of-github-through-commandline/</link>
+      <title>Basics of GitHub through command line</title>
+      <link>/2018/05/18/basics-of-github-through-command-line/</link>
       <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/05/18/basics-of-github-through-commandline/</guid>
+      <guid>/2018/05/18/basics-of-github-through-command-line/</guid>
       <description>Create account and repository on github.com Go to github.com and create an account. Once, account is created, create a repository in Repositories tab and click on the green button New. The following page opens.
  NOTE: A repository is something like a project folder.
    Copy repository URL After a new repository is created, copy the clone url link. This link is used to clone the repository from server to the computer.</description>
