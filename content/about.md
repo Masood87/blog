@@ -4,7 +4,7 @@ author: "Masood Sadat"
 date: "May 21, 2018"
 ---
 
-I am trained in economics but my interest transcends economics to all social sciences, technology and data science. In addition to my formal education, which I owe a lot of my knowledge to, I have been self-learning and teaching others topics in data analysis and data science since 2014. I start this website/blog to share my work such as custom analysis, R and Stata tips and tricks, and other related posts for public and for my future self.
+My name is Masood Sadat, from Afghanistan living in Kabul. I am trained in economics but my interest transcends economics to all social sciences, technology and data science. In addition to my formal education, which I owe a lot of my knowledge to, I have been self-learning and teaching others topics in data analysis and data science since 2014. I start this website/blog to share custom analysis I carry out every now and then, R and Stata tips and tricks, and other related posts for anyone interested and for my future self.
 
 I also maintain [**Afghanistan Data Hub**](http://afghanistandatahub.com). I created Afghanistan Data Hub to upload data sets on Afghanistan. In the next year or so, I plan to move it to my personal website in the near future though.
 
