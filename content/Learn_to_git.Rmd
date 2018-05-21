@@ -1,0 +1,18 @@
+---
+title: "Learn How to GitHub"
+author: "Masood Sadat"
+date: "May 8, 2018"
+output: html_document
+---
+
+```{r include=FALSE}
+require(knitr)
+require(tidyverse)
+```
+
+# Create account and repository on github.com
+
+Go to [`github.com`](https://github.com) and create an account. Once, account is created, create a repository in `Repositories` tab and click on the green button `New`. The following page opens.
+
+> _**NOTE:** A repository is something like a project folder._
+
