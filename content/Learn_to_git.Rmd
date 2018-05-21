@@ -2,7 +2,9 @@
 title: "Learn How to GitHub"
 author: "Masood Sadat"
 date: "May 8, 2018"
-output: html_document
+output: 
+  html_document:
+    self_contained: no
 ---
 
 ```{r include=FALSE}
@@ -15,4 +17,170 @@ require(tidyverse)
 Go to [`github.com`](https://github.com) and create an account. Once, account is created, create a repository in `Repositories` tab and click on the green button `New`. The following page opens.
 
 > _**NOTE:** A repository is something like a project folder._
+
+```{r echo=FALSE, out.width="100%"}
+include_graphics("~/Documents/GitHub/learn-how-to-github/screenshots/create repository.png")
+```
+
+# Copy repository URL
+
+After a new repository is created, copy the `clone url` link. This link is used to clone the repository from server to the computer.
+
+```{r echo=FALSE, out.width="100%"}
+include_graphics("~/Documents/GitHub/learn-how-to-github/screenshots/copy clone url.png")
+```
+
+# Set working directory
+
+On Mac computers, open `Terminal` (the dreaded command line). I am not an expert on `terminal` and it is like a black box to me at this point. But for purpose of using `git`, it is not difficult and we need to know only a few commands.
+
+> _**NOTE:** To find `terminal`, search spotlight OR go to `Applications` > `Utilities` > `Terminal`._
+
+The following are important commands for working with directory:
+
+* Check working directory: `pwd`
+* Use `cd` to change working directory.
+    + Go up one folder: `cd ..`
+    + Go into a folder: `cd ~/documents/github`
+* Check content of workding directory: `ls` (or `dir` for windows)
+* Make a new folder: `mkdir [foldername]`
+
+For our project, we go to our desired directory and create a new folder if necessary.
+
+So, first thing in the `terminal`, we check the working directory
+
+```{r eval=FALSE}
+pwd
+```
+
+Then, we change the working directory to where we want. I have already a folder called `GitHub` in `Documents`, so I set the working directory there
+
+```{r eval=FALSE}
+cd ~/documents/github
+```
+
+We check the content of our working directory.
+
+```{r eval=FALSE}
+ls
+```
+
+Here is a screen shot of the process. As you can see, there are already three folders in the working directory.
+
+```{r echo=FALSE, out.width="100%"}
+include_graphics("~/Documents/GitHub/learn-how-to-github/screenshots/set working directory.png")
+```
+
+# Clone the repository to computer
+
+In the `terminal`, clone the repository in the working directory (i.e. from step 3: `~/Documents/GitHub/`). To do that, we use `git clone` with the url in the terminal command line.
+
+```{r eval=FALSE}
+git clone https://github.com/Masood87/Learn-how-to-github.git
+```
+
+> _**NOTE:** `git clone` is the first of five git commands we learn here. `git clone` essentially clones the repository into your working directory (in our case it is `~/Documents/GitHub/`)._
+
+Type `ls` in the `terminal` after `git clone` to see the cloned files.
+
+```{r eval=FALSE}
+ls
+```
+
+Next, change your working directory to the cloned folder `Learn-how-to-github`
+
+```{r eval=FALSE}
+cd Learn-how-to-github
+```
+
+You can check again the content of `Learn-how-to-github`
+
+```{r eval=FALSE}
+ls
+```
+
+Here is a screen shot of the process. As you can see, `Learn-how-to-github` is added and there is nothing inside it yet.
+
+```{r echo=FALSE, out.width="100%"}
+include_graphics("~/Documents/GitHub/learn-how-to-github/screenshots/git clone.png")
+```
+
+# Make a change to repository and `git add`
+
+After repository is cloned, we either add new files or modify an existing file. In this case, we add add a new folder with four files. In the finder, I add a folder called `screenshots` with four `.jpg` files in them.
+
+In the terminal, we check the status of the cloned folder using `git status`.
+
+> _**NOTE:** `git status` is used to check any changes including modification of codes inside a file (if any)._
+
+```{r eval=FALSE}
+git status
+```
+
+The changes will be noted in red font. We either _accept_ to update the changes in the repository or _ignore_ it. To _accept_ and upload the changes, there are **three** steps:
+
+* `git add` to ....
+* `git commit` to ....
+* and `git push` to ....
+
+To `git add`, there are three ways in this case. The first one _add screenshots/_ only, and the other two _add all_.
+
+```{r eval=FALSE}
+git add screenshots/
+
+git add -A
+
+git add .
+```
+
+Check the status again
+
+```{r eval=FALSE}
+git status
+```
+
+Here is a screen shot of the process. After `git add`, the status shows four files in green font. These files are changes to be _committed_.
+
+```{r echo=FALSE, out.width="100%"}
+include_graphics("~/Documents/GitHub/learn-how-to-github/screenshots/git add.png")
+```
+
+# Commit changes in repository with `git commit`
+
+The next step after `git add` that adds the changes is to _lock_ the changes. This _locking_ does not mean applying the changes, which is done using `git push`.
+
+To commit changes, type `git commit` and `-m` with a message inside quotes.
+
+```{r eval=FALSE}
+git commit -m "Screen shots used in the final product are added"
+```
+
+At this stage, the change is committed but it is still on the computer and not synchronized with github.com repository. To sync, type `git push`
+
+```{r eval=FALSE}
+git push
+```
+
+Here is a screen shot of the process. After `git add`, there is `git commit` and finally `git push`. Now the files are synchronized with github.com
+
+```{r echo=FALSE, out.width="100%"}
+include_graphics("~/Documents/GitHub/learn-how-to-github/screenshots/git commit and push.png")
+```
+
+# Workflow
+
+So far, all we discussed was to set up a new repository / project, and commit changes. Other times, we have to `pull` changes others make in the project. 
+
+The first thing one does when starting the day to work on a collaborative project is to change directory to the github repository/project using `cd` and request a `pull` of all the changes.
+
+```{r eval=FALSE}
+cd ~/documents/github/learn-how-to-github
+git pull
+```
+
+More details coming up...
+
+# Others
+
+To see all commands we can use and what they do, just type `git`.
 

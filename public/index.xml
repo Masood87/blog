@@ -59,7 +59,7 @@ I am trained in economics but my interest transcends economics to all social sci
       <guid>/learn_to_git/</guid>
       <description>Create account and repository on github.com Go to github.com and create an account. Once, account is created, create a repository in Repositories tab and click on the green button New. The following page opens.
  NOTE: A repository is something like a project folder.
-  </description>
+  Copy repository URL After a new repository is created, copy the clone url link. This link is used to clone the repository from server to the computer.</description>
     </item>
     
   </channel>
