@@ -1,5 +1,5 @@
 ---
-title: "Learn How to GitHub"
+title: "Basics of GitHub through commandline"
 author: "Masood Sadat"
 date: "`r as.Date('2018-05-18')`"
 output: 
