@@ -1,6 +1,11 @@
 ---
 title: "About"
-date: "2016-05-05T21:48:51-07:00"
+author: "Masood Sadat"
+date: "`r format(Sys.Date(), '%B %e, %Y')'"
 ---
 
-This is a "hello world" example website for the [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium).
+_**Masood Sadat**_
+
+I am trained in economics but my interest transcends economics to all social sciences, technology and data science. In addition to my formal education, which I owe a lot of my knowledge to, I have been self-learning and teaching techniques in data analysis and data science since 2014. I start this website/blog to share analysis, tips and tricks, and other related posts for public and for my future self.
+
+> _Note: I have created and maintain this website using `blogdown` package in R. You can find all documents and posts on [**github**](https://github.com/Masood87/masoodblog)._
