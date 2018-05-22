@@ -1,0 +1,17 @@
+---
+title: Plot Missing Values
+author: Masood Sadat
+date: '2018-05-22'
+slug: plot-missing-values
+categories:
+  - R tips
+tags:
+  - R tips
+---
+
+In one of [**DataCamp**](http://datacamp.com/)'s courses that I cannot remember at the moment, the instructor used `geom_tile` from `ggplot2` package to visualize missing values. It was something like this.
+
+```{r}
+airquality
+```
+

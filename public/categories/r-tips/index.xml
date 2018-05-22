@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R Tips on Masood Sadat Blog</title>
+    <link>/categories/r-tips/</link>
+    <description>Recent content in R Tips on Masood Sadat Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 22 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/r-tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Plot Missing Values</title>
+      <link>/2018/05/22/plot-missing-values/</link>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/05/22/plot-missing-values/</guid>
+      <description>In one of DataCamp’s courses that I cannot remember at the moment, the instructor used geom_tile from ggplot2 package to visualize missing values. It was something like this.
+airquality ## Ozone Solar.R Wind Temp Month Day ## 1 41 190 7.4 67 5 1 ## 2 36 118 8.0 72 5 2 ## 3 12 149 12.6 74 5 3 ## 4 18 313 11.5 62 5 4 ## 5 NA NA 14.</description>
+    </item>
+    
+  </channel>
+</rss>
