@@ -9,9 +9,36 @@ tags:
   - R tips
 ---
 
-In one of [**DataCamp**](http://datacamp.com/)'s courses that I cannot remember at the moment, the instructor used `geom_tile` from `ggplot2` package to visualize missing values. It was something like this.
+In one of [**DataCamp**](http://datacamp.com/) courses that I cannot remember which one, the instructor used `geom_tile` from `ggplot2` package to visualize missing values. Here, I am going to replicate that using `airquality` dataset from base R.
 
-```{r}
-airquality
+To start, we can use `summary()` and `str()` functions to inspect the data.
+
+```{r message=FALSE, warning=FALSE}
+summary(airquality)
 ```
+
+```{r message=FALSE, warning=FALSE}
+str(airquality)
+```
+
+From above, I can inspect data type, desriptive statistics, and first few values of each column/variable. The `summary()` also provide if any of the columns have missing values. `glimpse()` from **dplyr** also provide another function to inspect the data.
+
+We found out that `Ozone` and `Solar.R` columns have missing values. 
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+
+airquality %>%
+  is.na() %>%
+  data.frame() %>%
+  mutate(obs = 1:nrow(.)) %>%
+  gather(var, is_missing, -obs) %>%
+  ggplot(aes(var, obs, fill = is_missing)) + geom_tile()
+```
+
+
+
+
+
+
 
