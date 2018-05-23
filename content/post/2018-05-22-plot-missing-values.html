@@ -11,9 +11,11 @@ tags:
 
 
 
-<p>In one of <a href="http://datacamp.com/"><strong>DataCamp</strong></a> courses that I cannot remember which one, the instructor used <code>geom_tile</code> from <code>ggplot2</code> package to visualize missing values. Here, I am going to replicate that using <code>airquality</code> dataset from base R.</p>
-<p>To start, we can use <code>summary()</code> and <code>str()</code> functions to inspect the data.</p>
-<pre class="r"><code>summary(airquality)</code></pre>
+<blockquote>
+<p>In the 2nd day of my <strong>#100DaysOfCode</strong> challenge, I want to try <strong>visdat</strong> package to visualize missing values. Then, I will show you how we can do a similar plot using <strong>ggplot2</strong> package. Then, using the second method, I will show you in addition to missing values we can visualize any other value(s).</p>
+</blockquote>
+<p>There are many ways to inspect and find about missing values. Let’s use <code>summary()</code> functions from base R to explore missing values in <strong>airquality</strong> dataset.</p>
+<pre class="r"><code>summary(airquality) # summary statistics of variables/columns of airquality dataset</code></pre>
 <pre><code>##      Ozone           Solar.R           Wind             Temp      
 ##  Min.   :  1.00   Min.   :  7.0   Min.   : 1.700   Min.   :56.00  
 ##  1st Qu.: 18.00   1st Qu.:115.8   1st Qu.: 7.400   1st Qu.:72.00  
@@ -30,22 +32,99 @@ tags:
 ##  3rd Qu.:8.000   3rd Qu.:23.0  
 ##  Max.   :9.000   Max.   :31.0  
 ## </code></pre>
-<pre class="r"><code>str(airquality)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    153 obs. of  6 variables:
-##  $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
-##  $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
-##  $ Wind   : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
-##  $ Temp   : int  67 72 74 62 56 66 65 59 61 69 ...
-##  $ Month  : int  5 5 5 5 5 5 5 5 5 5 ...
-##  $ Day    : int  1 2 3 4 5 6 7 8 9 10 ...</code></pre>
-<p>From above, I can inspect data type, desriptive statistics, and first few values of each column/variable. The <code>summary()</code> also provide if any of the columns have missing values. <code>glimpse()</code> from <strong>dplyr</strong> also provide another function to inspect the data.</p>
-<p>We found out that <code>Ozone</code> and <code>Solar.R</code> columns have missing values.</p>
-<pre class="r"><code>library(tidyverse)
-
-airquality %&gt;%
-  is.na() %&gt;%
+<p>From the <code>summary()</code> function, we can see columns/variables <strong>Ozone</strong> has 36 missing values (NA’s) and <strong>Solar.R</strong> has 7 missing values. We can use <code>View()</code> function to inspect the whole dataset in a spreadsheet view.</p>
+<div id="visualize-missing-values-with-visdat-package" class="section level2">
+<h2>Visualize missing values with visdat package</h2>
+<p>Let’s explore the <strong>visdat</strong> package that promises to provide an easy way to inspect the whole dataset. If you haven’t used it before, you have to install it and then load it.</p>
+<pre class="r"><code># install.packages(&quot;visdat&quot;)
+library(visdat) # load visdat package</code></pre>
+<p>There are two functions in <strong>visdat</strong> package that we need to know: <code>vis_miss()</code> function that plots missing values of a data and <code>vis_dat()</code> function that plots class of data. After loading the <strong>visdat</strong> package, both functions are available and the way to use them is with a data.frame object.</p>
+<p>Let’s use <strong>airquality</strong> dataset with <code>vis_miss()</code> function to visualize missing values. This plots the columns in <strong>airquality</strong> data.frame vertically and observations horizontally, resembling the way data is stored. Black color represents missing values and grey color represents non-missing values. There is even percentages of missing vlaues with one decimal points for each column and an overall percentage, which I find extremely useful. Compared to <code>summary()</code>, this plot gives a lot more information.</p>
+<pre class="r"><code>vis_miss(airquality)</code></pre>
+<p><img src="/post/2018-05-22-plot-missing-values_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Let’s use <code>vis_dat()</code> function. This plot visualizes the class of each column of <strong>airquality</strong> dataset in addition to indicating missing values. However, percentages of missing values are not shown.</p>
+<pre class="r"><code>vis_dat(airquality)</code></pre>
+<p><img src="/post/2018-05-22-plot-missing-values_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="visualize-missing-values-with-ggplot2-package" class="section level2">
+<h2>Visualize missing values with ggplot2 package</h2>
+<p>Next, let’s create a similar plot using <strong>ggplot2</strong> package. I suspect <code>vis_miss()</code> and <code>vis_dat()</code> use <strong>ggplot2</strong> under the hood.</p>
+<p>I am going to load <strong>tidyverse</strong> package, which includes packages such as <strong>ggplot2</strong>, <strong>dplyr</strong>, and <strong>tidyr</strong>. So instead of loading these three packages that we need, I am going to load only <strong>tidyverse</strong>.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<p>Again I am going to use <strong>airquality</strong> dataset. The following chunk of code produces a plot that indicates missing values. I have left comments inside the code that explains each part of the process.</p>
+<pre class="r"><code>airquality %&gt;%
+  
+  # takes airquality data.frame as argument and returns a matrix of TRUE and FALSE, with TRUE indicating missing values
+  is.na() %&gt;% 
+  
+  # takes the matrix as argument and converts it into a data.frame object
+  data.frame() %&gt;%
+  
+  # takes the data.frame object as argument, and creates a column named obs that takes value 1 through 153 which is airquality&#39;s number of rows
+  mutate(obs = 1:nrow(.)) %&gt;%
+  
+  # takes the data.frame object with new column obs and reshape it from wide format to long format, transforming all other columns into var and is_missing columns, with exception of obs column
+  gather(var, is_missing, -obs) %&gt;%
+  
+  # takes the data.frame in long format and produces a tile plot with var column in x axis, obs column in y axis, and fill the tiles based with is_missing column values
+  ggplot(aes(x = var, y = obs, fill = is_missing)) + geom_tile() + 
+  
+  # use a black and white theme for the plot
+  theme_bw() +
+  
+  # change x and y axes titles of the plot
+  labs(x=&quot;Variables&quot;, y=&quot;Observations&quot;) +
+  
+  # move the x axis of the plot to the top
+  scale_x_discrete(position = &quot;top&quot;) +
+  
+  # change the angle of x axis labels and horizontal adjustment
+  theme(axis.text.x = element_text(angle = 90, hjust = 0))</code></pre>
+<p><img src="/post/2018-05-22-plot-missing-values_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The above code chunk is an example of a nested code that is simplied using pipe operators <strong>%&gt;%</strong> from <strong>magrittr</strong> package which is made avaible by loading <strong>tidyverse</strong> package.</p>
+</div>
+<div id="visualize-any-other-values-with-ggplot2-package" class="section level2">
+<h2>Visualize any other values with ggplot2 package</h2>
+<p>What the <strong>ggplot2</strong> method allows is the possibility of manipulating the code to produce plots that visualizes presence of another value. The second line of the code, <code>is.na()</code> function, transforms the <strong>airquality</strong> dataset into a matrix of TRUE and FALSE (or 0 and 1) which later is supplied into the <code>ggplot()</code> function to create the plot.</p>
+<p>Let’s explore <code>is.na()</code> function separately. As you can observe, the result of <code>is.na(airquality)</code> is a matrix containing TRUE and FALSE.</p>
+<pre class="r"><code>is.na(airquality) %&gt;% 
+  head() # print only first rows of the matrix produced by is.na(airquality)</code></pre>
+<pre><code>##      Ozone Solar.R  Wind  Temp Month   Day
+## [1,] FALSE   FALSE FALSE FALSE FALSE FALSE
+## [2,] FALSE   FALSE FALSE FALSE FALSE FALSE
+## [3,] FALSE   FALSE FALSE FALSE FALSE FALSE
+## [4,] FALSE   FALSE FALSE FALSE FALSE FALSE
+## [5,]  TRUE    TRUE FALSE FALSE FALSE FALSE
+## [6,] FALSE    TRUE FALSE FALSE FALSE FALSE</code></pre>
+<p>So, instead of <code>is.na()</code> if we use another logical test (e.g. airquality &gt; 50) to create a matrix of TRUE and FALSE too. Let’s assume we are interested to know if airquality has any values greater than 50. So we bring changes in the second line <code>{. &gt; 50}</code> and create <code>is_greater_than_50</code> instead of <code>is_missing</code> in the fifth and sixth lines. The resulting plot indicates missing values in grey color, &gt;50 vaules with blue color, and the rest in red color. <code>ggplot()</code> has a lot of functions that allows you to customize this plot in almost any way in case you are interested.</p>
+<pre class="r"><code>airquality %&gt;%
+  {. &gt; 50} %&gt;%
   data.frame() %&gt;%
   mutate(obs = 1:nrow(.)) %&gt;%
-  gather(var, is_missing, -obs) %&gt;%
-  ggplot(aes(var, obs, fill = is_missing)) + geom_tile()</code></pre>
-<p><img src="/post/2018-05-22-plot-missing-values_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+  gather(var, is_greater_than_50, -obs) %&gt;%
+  ggplot(aes(x = var, y = obs, fill = is_greater_than_50)) + geom_tile() + 
+  theme_bw() +
+  labs(x=&quot;Variables&quot;, y=&quot;Observations&quot;) +
+  scale_x_discrete(position = &quot;top&quot;) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 0))</code></pre>
+<p><img src="/post/2018-05-22-plot-missing-values_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="create-a-generic-function-to-plot-any-condition" class="section level2">
+<h2>Create a generic function to plot any condition</h2>
+<p>Perhaps you would like to visualize every dataset you work with. In that case, you might be better off creating a function instead of typing all that code or even copy/pasting.</p>
+<p>Let’s take the existing code and turn it into a function. The following chunk of code creates a function called <code>missing_tiles()</code> that takes a data.frame and returns a tile plot of missing values.</p>
+<pre class="r"><code>missing_tiles &lt;- function(x){
+  is.na(x) %&gt;% 
+    data.frame() %&gt;% 
+    mutate(obs = 1:nrow(.)) %&gt;% 
+    gather(var, is_miss, -obs) %&gt;%
+    ggplot(aes(x = var, y = obs, fill = is_miss)) + geom_tile() + 
+    theme_bw() +
+    theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0)) + 
+    labs(x = &quot;Variables&quot;, y = &quot;Observations&quot;) +
+    scale_x_discrete(position = &quot;top&quot;)
+}
+missing_tiles(airquality)</code></pre>
+<p><img src="/post/2018-05-22-plot-missing-values_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Next, we create a more general function that takes any condition.</p>
+</div>

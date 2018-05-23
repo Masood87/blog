@@ -17,9 +17,8 @@
       <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/05/22/plot-missing-values/</guid>
-      <description>In one of DataCamp courses that I cannot remember which one, the instructor used geom_tile from ggplot2 package to visualize missing values. Here, I am going to replicate that using airquality dataset from base R.
-To start, we can use summary() and str() functions to inspect the data.
-summary(airquality) ## Ozone Solar.R Wind Temp ## Min. : 1.00 Min. : 7.0 Min. : 1.700 Min. :56.00 ## 1st Qu.: 18.00 1st Qu.</description>
+      <description>In the 2nd day of my #100DaysOfCode challenge, I want to try visdat package to visualize missing values. Then, I will show you how we can do a similar plot using ggplot2 package. Then, using the second method, I will show you in addition to missing values we can visualize any other value(s).
+ There are many ways to inspect and find about missing values. Let’s use summary() functions from base R to explore missing values in airquality dataset.</description>
     </item>
     
     <item>
