@@ -117,8 +117,8 @@ is.na(airquality) %&gt;%
   {x} %&gt;%
     data.frame() %&gt;% 
     mutate(obs = 1:nrow(.)) %&gt;% 
-    gather(var, condition, -obs) %&gt;%
-    ggplot(aes(x = var, y = obs, fill = condition)) + geom_tile() + 
+    gather(var, condition_is, -obs) %&gt;%
+    ggplot(aes(x = var, y = obs, fill = condition_is)) + geom_tile() + 
     theme_bw() +
     theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0)) + 
     labs(x = &quot;Variables&quot;, y = &quot;Observations&quot;) +
