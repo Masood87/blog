@@ -129,8 +129,8 @@ conditional_plot <- function(x){
   {x} %>%
     data.frame() %>% 
     mutate(obs = 1:nrow(.)) %>% 
-    gather(var, is_miss, -obs) %>%
-    ggplot(aes(x = var, y = obs, fill = is_miss)) + geom_tile() + 
+    gather(var, condition, -obs) %>%
+    ggplot(aes(x = var, y = obs, fill = condition)) + geom_tile() + 
     theme_bw() +
     theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0)) + 
     labs(x = "Variables", y = "Observations") +
