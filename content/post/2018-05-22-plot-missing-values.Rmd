@@ -10,28 +10,35 @@ tags:
 ---
 
 
-> In the 2nd day of my **#100DaysOfCode** challenge, I want to try **visdat** package to visualize missing values. Then, I will show you how we can do a similar plot using **ggplot2** package. Then, using the second method, I will show you in addition to missing values we can visualize any other value(s).
+> In this post, we will explore **visdat** package to visualize missing values. Then, we will recreate a similar plot using **ggplot2** package. Next, using the **ggplot2** method, we will visualize other numeric or character values in a dataset. Finally, using the **ggplot2** method, we will create a custom function that will plot any value in any dataset.
 
-There are many ways to inspect and find about missing values. Let's use `summary()` functions from base R to explore missing values in **airquality** dataset.
+There are many ways to inspect and find about missing values in a dataset. For example, `summary()` function from base R produces descriptive statistics and number of `NA`'s. Let's use that with **airquality** dataset, that has some missing values.
 
 ```{r message=FALSE, warning=FALSE}
-summary(airquality) # summary statistics of variables/columns of airquality dataset
+summary(airquality)
 ```
 
-From the `summary()` function, we can see columns/variables **Ozone** has 36 missing values (NA's) and **Solar.R** has 7 missing values. We can use `View()` function to inspect the whole dataset in a spreadsheet view.
+From the output of `summary()` function, we can see columns/variables **Ozone** has 36 missing values (`NA`'s) and column **Solar.R** has 7 missing values. 
+
+You can also inspect the whole dataset as in a spreadsheet view using `View()`.
+
+```{r eval=FALSE, message=FALSE, warning=FALSE}
+View(airquality)
+```
+
 
 ## Visualize missing values with visdat package
 
-Let's explore the **visdat** package that promises to provide an easy way to inspect the whole dataset. If you haven't used it before, you have to install it and then load it.
+Let's explore the **visdat** package that promises to provide an easy way to inspect `NA`'s for the whole dataset. If you haven't used it before, you have to install it and then load it.
 
 ```{r}
-# install.packages("visdat")
-library(visdat) # load visdat package
+# install.packages("visdat")    #installs visdat package
+library(visdat)                 #loads visdat package
 ```
 
-There are two functions in **visdat** package that we need to know: `vis_miss()` function that plots missing values of a data and `vis_dat()` function that plots class of data. After loading the **visdat** package, both functions are available and the way to use them is with a data.frame object. 
+There are two functions in **visdat** package that we need to know: `vis_miss()` function that plots missing values in a dataset and `vis_dat()` function that plots class of variables in a dataset in addition to missing values. After loading the **visdat** package, both functions are available and they take a data.frame object as argument and returns a plot of that data.frame.
 
-Let's use **airquality** dataset with `vis_miss()` function to visualize missing values. This plots the columns in **airquality** data.frame vertically and observations horizontally, resembling the way data is stored. Black color represents missing values and grey color represents non-missing values. There is even percentages of missing vlaues with one decimal points for each column and an overall percentage, which I find extremely useful. Compared to `summary()`, this plot gives a lot more information.
+Let's use **airquality** dataset with `vis_miss()` function to visualize missing values. This plots the columns in **airquality** data.frame vertically and observations horizontally, resembling the way data is stored. Black color represents missing values and grey color represents non-missing values. There is even percentages of missing vlaues with one decimal points for each column and an overall percentage in the legend, which I find extremely useful. Compared to `summary()`, this plot gives a lot more information.
 
 ```{r message=FALSE, warning=FALSE}
 vis_miss(airquality)
@@ -45,21 +52,19 @@ vis_dat(airquality)
 
 ## Visualize missing values with ggplot2 package
 
-Next, let's create a similar plot using **ggplot2** package. I suspect `vis_miss()` and `vis_dat()` use **ggplot2** under the hood.
+I suspect `vis_miss()` and `vis_dat()` use **ggplot2** under the hood because they resemble plots created with **ggplot2** package. Let's attempt to use **ggplot2** package to recreate a similar plot `vis_miss()` created.
 
-I am going to load **tidyverse** package, which includes packages such as **ggplot2**, **dplyr**, and **tidyr**. So instead of loading these three packages that we need, I am going to load only **tidyverse**.
+I am going to load **tidyverse** package, which includes packages that we need: **ggplot2**, **dplyr**, and **tidyr**. So instead of loading these three packages separately, I am going to load only **tidyverse**.
 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 ```
 
-Again I am going to use **airquality** dataset. The following chunk of code produces a plot that indicates missing values. I have left comments inside the code that explains each part of the process.
+Again I am going to use **airquality** dataset. The following chunk of code produces a plot that indicates missing values. I have left comments inside the code that explains each part of the code.
 
 ```{r message=FALSE, warning=FALSE}
-airquality %>%
-  
-  # takes airquality data.frame as argument and returns a matrix of TRUE and FALSE, with TRUE indicating missing values
-  is.na() %>% 
+# takes airquality data.frame and tests presence of missing values, returning a matrix of TRUE and FALSE, with TRUE indicating missing values
+is.na(airquality) %>%
   
   # takes the matrix as argument and converts it into a data.frame object
   data.frame() %>%
@@ -86,11 +91,11 @@ airquality %>%
   theme(axis.text.x = element_text(angle = 90, hjust = 0))
 ```
 
-The above code chunk is an example of a nested code that is simplied using pipe operators **%>%** from **magrittr** package which is made avaible by loading **tidyverse** package.
+The above code chunk is an example of a nested code that is simplied using pipe operators **%>%** from **magrittr** package, which is made avaible by loading **tidyverse** package.
 
 ## Visualize any other values with ggplot2 package
 
-What the **ggplot2** method allows is the possibility of manipulating the code to produce plots that visualizes presence of another value. The second line of the code, `is.na()` function, transforms the **airquality** dataset into a matrix of TRUE and FALSE (or 0 and 1) which later is supplied into the `ggplot()` function to create the plot. 
+What the above code chunk allows is the possibility of manipulating the code to produce plots that visualizes presence of another value. If you read the first line of the code, `is.na()` function tests the data.frame for missing values, and transforms the **airquality** dataset into a matrix of TRUE and FALSE (or 0 and 1), which later is supplied into the `ggplot()` function to create the plot.
 
 Let's explore `is.na()` function separately. As you can observe, the result of `is.na(airquality)` is a matrix containing TRUE and FALSE.
 
@@ -99,11 +104,10 @@ is.na(airquality) %>%
   head() # print only first rows of the matrix produced by is.na(airquality)
 ```
 
-So, instead of `is.na()` if we use another logical test (e.g. airquality > 50) to create a matrix of TRUE and FALSE too. Let's assume we are interested to know if airquality has any values greater than 50. So we bring changes in the second line `{. > 50}` and create `is_greater_than_50` instead of `is_missing` in the fifth and sixth lines. The resulting plot indicates missing values in grey color, >50 vaules with blue color, and the rest in red color. `ggplot()` has a lot of functions that allows you to customize this plot in almost any way in case you are interested.
+So, instead of `is.na()` if we use another test (e.g. airquality > 50) to create a matrix of TRUE and FALSE too. Let's assume we are interested to know if **airquality** dataset has any values greater than 50. So we bring changes in the second line `{. > 50}` and create `is_greater_than_50` instead of `is_missing` in the fifth and sixth lines. The resulting plot indicates missing values in grey color, **>50** vaules with blue color, and the rest in red color. `ggplot()` has a lot of functions that allows you to customize this plot in almost any way in case you are interested.
 
 ```{r message=FALSE, warning=FALSE}
-airquality %>%
-  {. > 50} %>%
+{airquality > 50} %>%
   data.frame() %>%
   mutate(obs = 1:nrow(.)) %>%
   gather(var, is_greater_than_50, -obs) %>%
@@ -114,15 +118,15 @@ airquality %>%
   theme(axis.text.x = element_text(angle = 90, hjust = 0))
 ```
 
-## Create a generic function to plot any condition
+## Create a custom function to plot any condition
 
-Perhaps you would like to visualize every dataset you work with. In that case, you might be better off creating a function instead of typing all that code or even copy/pasting.
+Perhaps you would like to visualize every dataset you work with and different conditions. For exmaple, you might want to plot values above 100. In that case, you might be better off creating a function instead of typing all that code or even copy/pasting.
 
-Let's take the existing code and turn it into a function. The following chunk of code creates a function called `missing_tiles()` that takes a data.frame and returns a tile plot of missing values.
+I am going to create a function called `conditional_plot()` that will take a condition (e.g. **airquality > 100**) as an argument, and plots the values that satisfy the condition in one color, values that do not satisfy the condition in another color, and NA's in grey color.
 
 ```{r message=FALSE, warning=FALSE}
-missing_tiles <- function(x){
-  is.na(x) %>% 
+conditional_plot <- function(x){
+  {x} %>%
     data.frame() %>% 
     mutate(obs = 1:nrow(.)) %>% 
     gather(var, is_miss, -obs) %>%
@@ -132,14 +136,13 @@ missing_tiles <- function(x){
     labs(x = "Variables", y = "Observations") +
     scale_x_discrete(position = "top")
 }
-missing_tiles(airquality)
+conditional_plot(airquality>50)
 ```
 
-Next, we create a more general function that takes any condition.
+**There are two things to note:**
 
-```{r message=FALSE, warning=FALSE}
-```
-
+1. This `conditional_plot()` reorders the variables in alphabetical order. I will try to find a fix and update this post.
+2. The `conditional_plot()` will visualize the character/string columns as missing too. I will try to find a fix for this too and update this post.
 
 
 
