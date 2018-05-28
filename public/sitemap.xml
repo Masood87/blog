@@ -22,25 +22,25 @@
   </url>
   
   <url>
-    <loc>/categories/afghanistan/</loc>
-    <lastmod>2018-05-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/afghanistan/</loc>
     <lastmod>2018-05-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/afghansurvey/</loc>
+    <loc>/categories/afghanistan/</loc>
     <lastmod>2018-05-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/afghansurvey/</loc>
+    <lastmod>2018-05-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/afghansurvey/</loc>
     <lastmod>2018-05-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -58,13 +58,13 @@
   </url>
   
   <url>
-    <loc>/categories/electricity/</loc>
+    <loc>/tags/electricity/</loc>
     <lastmod>2018-05-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/electricity/</loc>
+    <loc>/categories/electricity/</loc>
     <lastmod>2018-05-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -82,13 +82,13 @@
   </url>
   
   <url>
-    <loc>/categories/r-tips/</loc>
+    <loc>/tags/r-tips/</loc>
     <lastmod>2018-05-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/r-tips/</loc>
+    <loc>/categories/r-tips/</loc>
     <lastmod>2018-05-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

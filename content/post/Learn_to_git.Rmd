@@ -18,13 +18,13 @@ Go to [`github.com`](https://github.com) and create an account. Once, account is
 
 > _**NOTE:** A repository is something like a project folder._
 
-![](/post/Learn_to_git_files/create repository.png)
+![](/post/Learn_to_git_files/create repository.png){width=100%}
 
 # Copy repository URL
 
 After a new repository is created, copy the `clone url` link. This link is used to clone the repository from server to the computer.
 
-![](/post/Learn_to_git_files/copy clone url.png)
+![](/post/Learn_to_git_files/copy clone url.png){width=100%}
 
 # Set working directory
 
@@ -63,7 +63,7 @@ ls
 
 Here is a screen shot of the process. As you can see, there are already three folders in the working directory.
 
-![](/post/Learn_to_git_files/set working directory.png)
+![](/post/Learn_to_git_files/set working directory.png){width=100%}
 
 # Clone the repository to computer
 
@@ -95,11 +95,11 @@ ls
 
 Here is a screen shot of the process. As you can see, `Learn-how-to-github` is added and there is nothing inside it yet.
 
-![](/post/Learn_to_git_files/git clone.png)
+![](/post/Learn_to_git_files/git clone.png){width=100%}
 
 # Make a change to repository and `git add`
 
-After repository is cloned, we either add new files or modify an existing file. In this case, we add add a new folder with four files. In the finder, I add a folder called `screenshots` with four `.jpg` files in them.
+After repository is cloned, we either add new files or modify an existing file. In this case, we add add a new folder with four files. In the finder, I add a folder called `screenshots` with four `.png` files in them.
 
 In the terminal, we check the status of the cloned folder using `git status`.
 
@@ -133,7 +133,7 @@ git status
 
 Here is a screen shot of the process. After `git add`, the status shows four files in green font. These files are changes to be _committed_.
 
-![](/post/Learn_to_git_files/git add.png)
+![](/post/Learn_to_git_files/git add.png){width=100%}
 
 # Commit changes in repository with `git commit`
 
@@ -153,7 +153,7 @@ git push
 
 Here is a screen shot of the process. After `git add`, there is `git commit` and finally `git push`. Now the files are synchronized with github.com
 
-![](/post/Learn_to_git_files/git commit and push.png)
+![](/post/Learn_to_git_files/git commit and push.png){width=100%}
 
 # Workflow
 
