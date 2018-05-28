@@ -1,5 +1,5 @@
 ---
-title: "Basics of GitHub through command line"
+title: "Basics of GitHub Through Command Line"
 author: "Masood Sadat"
 date: "`r as.Date('2018-05-18')`"
 output: 
@@ -28,13 +28,13 @@ After a new repository is created, copy the `clone url` link. This link is used 
 
 # Set working directory
 
-On Mac computers, open `Terminal` (the dreaded command line). I am not an expert on `terminal` and it is like a black box to me at this point. But for purpose of using `git`, it is not difficult and we need to know only a few commands.
+On Mac computers, open **Terminal** (on windows open **Command Prompt** aka **cmd**). I am not an expert on **Terminal** and it is almost like a black box to me at this point. But for purpose of using **git**, it is not difficult and we need to know only a few commands.
 
-> _**NOTE:** To find `terminal`, search spotlight OR go to `Applications` > `Utilities` > `Terminal`._
+> _**NOTE:** To find **Terminal** on Mac, search spotlight OR go to `Applications > Utilities > Terminal`. To find **Command Prompt** on Windows, you can either find it in Accessories Folder in Start Menu, or find it in `C:\Windows\System32\cmd.exe` _
 
 The following are important commands for working with directory:
 
-* Check working directory: `pwd`
+* Check working directory: `pwd` (or `cd ,` for windows)
 * Use `cd` to change working directory.
     + Go up one folder: `cd ..`
     + Go into a folder: `cd ~/documents/github`
@@ -49,7 +49,7 @@ So, first thing in the `terminal`, we check the working directory
 pwd
 ```
 
-Then, we change the working directory to where we want. I have already a folder called `GitHub` in `Documents`, so I set the working directory there
+Then, we change the working directory to where we want. I have already alread a folder called **GitHub** in **Documents**, so I set the working directory there. You can either create a similar folder, or set an existing folder as your working directory.
 
 ```{r eval=FALSE}
 cd ~/documents/github
