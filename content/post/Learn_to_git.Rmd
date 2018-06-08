@@ -1,10 +1,14 @@
 ---
 title: "Basics of GitHub Through Command Line"
 author: "Masood Sadat"
-date: "`r as.Date('2018-05-18')`"
+date: "2018-05-18"
 output: 
   html_document:
     self_contained: no
+categories:
+  - git
+tags:
+  - git
 ---
 
 ```{r include=FALSE}

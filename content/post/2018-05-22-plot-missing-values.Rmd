@@ -4,9 +4,11 @@ author: Masood Sadat
 date: '2018-05-22'
 slug: plot-missing-values
 categories:
-  - R tips
+  - r tips
 tags:
-  - R tips
+  - EDA
+  - visualization
+  - function
 ---
 
 

@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>Afghansurvey</title>
-      <link>/categories/afghansurvey/</link>
-      <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/afghansurvey/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Custom Analysis</title>
       <link>/categories/custom-analysis/</link>
       <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
@@ -39,18 +30,18 @@
     </item>
     
     <item>
-      <title>Electricity</title>
-      <link>/categories/electricity/</link>
-      <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
+      <title>Git</title>
+      <link>/categories/git/</link>
+      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/categories/electricity/</guid>
+      <guid>/categories/git/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R Tips</title>
       <link>/categories/r-tips/</link>
-      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/categories/r-tips/</guid>
       <description></description>
