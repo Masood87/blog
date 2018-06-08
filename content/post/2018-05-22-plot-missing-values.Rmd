@@ -144,7 +144,7 @@ conditional_plot(airquality>50)
 1. This `conditional_plot()` reorders the variables in alphabetical order. I will try to find a fix and update this post.
 2. The `conditional_plot()` will visualize the character/string columns as missing too. I will try to find a fix for this too and update this post.
 
-
+**More in the upcoming post**
 
 
 
