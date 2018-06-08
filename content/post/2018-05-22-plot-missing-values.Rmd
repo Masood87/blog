@@ -148,6 +148,3 @@ conditional_plot(airquality>50)
 
 
 
-
-
-
