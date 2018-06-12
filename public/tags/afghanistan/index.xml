@@ -6,10 +6,20 @@
     <description>Recent content in Afghanistan on Masood Sadat Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 31 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/afghanistan/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Tuturial for Analysing Survey of the Afghan People in R</title>
+      <link>/2018/05/31/a-tuturial-for-analysing-survey-of-the-afghan-people-in-r/</link>
+      <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/05/31/a-tuturial-for-analysing-survey-of-the-afghan-people-in-r/</guid>
+      <description>About the Survey of the Afghan People Since 2006, The Asia Foundation conducts the Survey of the Afghan People, a nationally-representative annual survey. The Survey reflects perceptions about a broad range of topics including security, development, governance, service delivery, women’s rights, and migration. The Survey is broadly used by policy makers, academics, non-governmental organizations working in and on Afghanistan.
+The data for all waves of the survey is publicly available on the Asia Foundation website.</description>
+    </item>
     
     <item>
       <title>Perceptions About Electricity in Afghanistan: Insights From the Survey of the Afghan People</title>

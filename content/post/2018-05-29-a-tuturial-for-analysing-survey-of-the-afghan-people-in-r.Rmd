@@ -1,0 +1,24 @@
+---
+title: A Tuturial for Analysing Survey of the Afghan People in R
+author: 'Masood Sadat'
+date: '`r Sys.Date()`'
+slug: a-tuturial-for-analysing-survey-of-the-afghan-people-in-r
+categories:
+  - Afghanistan
+  - AfghanSurvey
+  - R tips
+tags:
+  - Afghanistan
+  - AfghanSurvey
+  - R tips
+urlcolor: blue
+---
+
+# About the Survey of the Afghan People
+
+Since 2006, The Asia Foundation conducts [_**the Survey of the Afghan People**_](https://asiafoundation.org/where-we-work/afghanistan/survey/), a nationally-representative annual survey. The Survey reflects perceptions about a broad range of topics including security, development, governance, service delivery, women’s rights, and migration. The Survey is broadly used by policy makers, academics, non-governmental organizations working in and on Afghanistan.
+
+The data for all waves of the survey is publicly available on the Asia Foundation [website](https://asiafoundation.org/where-we-work/afghanistan/survey/download-data-form/). After 
+
+
+
