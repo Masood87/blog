@@ -1,0 +1,29 @@
+---
+title: Selection of Provinces for Monitoring in SAP 2018
+author: ''
+date: '2018-06-10'
+slug: selection-of-provinces-for-monitoring-in-sap-2018
+categories:
+  - Afghanistan
+tags:
+  - AfghanSurvey
+  - EDA
+---
+
+# Introduction
+
+The Asia Foundation (TAF) employs a number of methods to ensure data quality for the Survey of the Afghan People (SAP). The most important quality controls are (1) third party monitoringy, and (2) logic tests. The third party monitoring is carried out on 10% of all surveys by independent companies. The **third party monitoring** started in 2014, and since then Sayara Research has been the implementing partner for this activity. The **logic tests** are a set of internal tools in the form of codes that are used to detects inconsistencies and potentially fraudulent data. In this note, I document the analysis and reasoning behind the selection of 13 provinces for _third party monitoring_.
+
+# Data
+
+TAF aims to use monitoring to improve the quality of fieldwork and the collected data, and employs monitoring in the most problematic provinces. In 2017, 13 provinces were monitored, and TAF wants to keep the same number of provinces for 2018 as well. To select 13 most problematic provinces, a number of documents and resources are consulted to finalize the list of provinces. The following are a list of documents and resources consulted for this task:
+
+1. Logic test results in 2017
+2. SAP sample in 2017
+3. Third Party Monitoring report in 2017
+4. Advices from the fieldwork and monitoring companies (ACSOR and Sayara)
+
+# Analysis
+
+
+
