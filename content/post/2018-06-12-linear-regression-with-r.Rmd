@@ -1,0 +1,34 @@
+---
+title: Linear regression with R
+author: ''
+date: '2018-06-12'
+slug: linear-regression-with-r
+categories:
+  - r tips
+tags:
+  - inferential statistics
+---
+
+
+# linear regression
+
+A simple linear regression using **mtcars** dataset, which is available with R. Here, we look at how number of cylinders in a car is associated with how many miles a car travels per gallon of gasoline--an indicator of fuel economy. Let's look at the structure of **mtcars** first.
+
+```{r}
+str(mtcars)
+```
+
+**mpg** and **cyl** are my variables of interest. Let's run a linear regression and see the result.
+
+```{r}
+lm(mpg ~ cyl, data = mtcars)
+```
+
+As expected, the relationship is negative, meaning more cylinders is associated with lower miles per gallon (mpg). The `lm()` function can be wrapped inside `summary()` and `broom::tidy()` too.
+
+```{r}
+lm_model <- lm(mpg ~ cyl, data = mtcars)
+broom::tidy(lm_model)
+```
+
+
