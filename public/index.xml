@@ -17,8 +17,8 @@
       <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/06/12/linear-regression-with-r/</guid>
-      <description>linear regression A simple linear regression using mtcars dataset, which is available with R. Here, we look at how number of cylinders in a car is associated with how many miles a car travels per gallon of gasoline–an indicator of fuel economy. Let’s look at the structure of mtcars first.
-str(mtcars) ## &amp;#39;data.frame&amp;#39;: 32 obs. of 11 variables: ## $ mpg : num 21 21 22.8 21.4 18.7 18.1 14.3 24.</description>
+      <description>Estimating linear regression Before starting, I am going to load a number of utility libraries for this session.
+library(tidyverse) library(broom) library(plotly) A simple linear regression using mtcars dataset. I want to look at how weight of a car is associated with how many miles a car travels per gallon of gasoline–an indicator of fuel economy. I am going to look at their summary and scatter plot.</description>
     </item>
     
     <item>
