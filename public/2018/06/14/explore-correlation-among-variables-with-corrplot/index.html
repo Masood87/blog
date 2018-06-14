@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.40.3" />
+
+
+<title>Explore Correlation Among Variables with Corrplot - Masood Sadat Blog</title>
+<meta property="og:title" content="Explore Correlation Among Variables with Corrplot - Masood Sadat Blog">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="http://afghanistandatahub.com">Afghanistan Data Hub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">Explore Correlation Among Variables with Corrplot</h1>
+
+    
+    <span class="article-date">2018/06/14</span>
+    
+
+    <div class="article-content">
+      <p>Exploring relationship among variables in a data set is never easier with <strong>corrplot</strong> package and function of the same name. <strong>corrplot</strong> takes in a correlation matrix and returns a visual representation of that correlation matrix.</p>
+<p>Try it for yourself.</p>
+<ol style="list-style-type: decimal">
+<li>Install and load <strong>corrplot</strong> package</li>
+</ol>
+<pre class="r"><code>install.packages(&quot;corrplot&quot;)
+library(corrplot)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Estimate correlation between all variables of <strong>mtcars</strong> dataset using <code>cor</code>, and then plot the correlations using <code>corrplot()</code>. You have to specify a method, and there are quite a few of them–here I demonstrate two of them: <em>square</em> and <em>number</em></li>
+</ol>
+<pre class="r"><code>mat &lt;- cor(mtcars)
+corrplot(mat, method = &quot;square&quot;)</code></pre>
+<p><img src="/post/2018-06-14-explore-correlation-among-variables-with-corrplot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>corrplot(mat, method = &quot;number&quot;)</code></pre>
+<p><img src="/post/2018-06-14-explore-correlation-among-variables-with-corrplot_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p>To explore more, see the help (<code>?corrplot</code>) and visit the Introduction to corrplot Package post on <a href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html">CRAN</a>.</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+
