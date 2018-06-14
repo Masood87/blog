@@ -1,0 +1,87 @@
+---
+title: Hypothesis testing with R
+author: Masood Sadat
+date: '2018-06-14'
+slug: hypothesis-testing-with-r
+categories:
+  - r tips
+tags:
+  - inferential statistics
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(ggplot2)
+library(broom)
+library(dplyr)
+```
+
+### A Meaningful Relationship
+
+The relatinship between weight (`wt`) and mileage (`mpg`) is negative one.
+
+```{r}
+# library(ggplot2)
+ggplot(mtcars, aes(wt, mpg)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
+```
+
+Fit a linear model to estimate the linear relationship between weight and mpg. The relationship is negative and it is statistically significant.
+
+```{r}
+# library(broom)
+# library(dplyr)
+tidy(lm(mpg ~ wt, data = mtcars))
+obs_slope <- tidy(lm(mpg ~ wt, data = mtcars)) %>% .[2,2]
+```
+
+In practice, to do inference, we will need to know the distribution of the slope under the null hypothesis, that is there is no relationship between explanatory and response variables.
+
+> _`pull()` function takes a data frame and returns a selected column as a vector (similar to $)_
+
+```{r}
+library(infer)
+perm_slopes <- mtcars %>%
+  specify(formula = mpg ~ wt) %>% # specify the linear model
+  hypothesize(null = "independence") %>% # provide null hypothesis that two variables are independent
+  generate(reps = 100, type = "permute") %>% # describe how to generate the sampling distribution
+  calculate(stat = "slope") # calculate the statistic of interest
+```
+
+Plot the permuted slopes using a histogram and add the observed slope as a vertical line. As you can see, the observed slope does not overlap even one of the 100 permuted slopes, which is another way of finding that p-value is less than 1%. This means, we reject the null hypothesis.
+
+```{r}
+ggplot(perm_slopes, aes(stat)) + geom_histogram() + # histogram distribution of slope of null hypothesis
+  geom_vline(xintercept = obs_slope, color = "red") # add a vertical line for observed slope
+```
+
+### A Not-Meaningful Relationship
+
+Now, using **mtcars** data set, let's look at the relationship between between real axle ratio (`drat`) and 1/4 mile time (`qsec`). It seems there is no relationship even without fitting a line.
+
+```{r}
+ggplot(mtcars, aes(drat, qsec)) + geom_point()
+```
+
+Let's fit a linear model anyway to estimate the linear relationship between `drat` and `qsec`. Observing the p-value, we cannot reject the null hypothesis that there is a meaningful relationship between the two variables--unlike the previous model of relationship between weight and mileage.
+
+```{r}
+tidy(lm(qsec ~ drat, data = mtcars))
+obs_slope <- tidy(lm(qsec ~ drat, data = mtcars)) %>% .[2,2]
+```
+
+We can go further and visualize the null distribution of the relationship between `drat` and `qsec`. Using **infer** package, we estimate 100 permutation of the null slopes.
+
+```{r}
+perm_slopes <- mtcars %>%
+  specify(qsec ~ drat) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 100, type = "permute") %>%
+  calculate(stat = "slope")
+```
+
+**infer** package does a great job in simulating the null hypothesis. Next, I am going to use **ggplot2** to plot the 100 permuted slopes in a histogram, and add a red vertical line that will represent the observed slope of `qsec` and `drat`. You can see that the observed slope overlaps the permuted slopes (null hypothesis), and once again we come to realization that we cannot observe a meaningful relationship between `qsec` and `drat` variables in the **mtcars** data set.
+
+```{r}
+ggplot(perm_slopes, aes(stat)) + geom_histogram() +
+  geom_vline(xintercept = obs_slope, color = "red")
+```
+

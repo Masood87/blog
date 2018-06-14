@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.40.3" />
+
+
+<title>Hypothesis testing with R - Masood Sadat Blog</title>
+<meta property="og:title" content="Hypothesis testing with R - Masood Sadat Blog">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="http://afghanistandatahub.com">Afghanistan Data Hub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Hypothesis testing with R</h1>
+
+    
+    <span class="article-date">2018/06/14</span>
+    
+
+    <div class="article-content">
+      <div id="a-meaningful-relationship" class="section level3">
+<h3>A Meaningful Relationship</h3>
+<p>The relatinship between weight (<code>wt</code>) and mileage (<code>mpg</code>) is negative one.</p>
+<pre class="r"><code># library(ggplot2)
+ggplot(mtcars, aes(wt, mpg)) + geom_point() + geom_smooth(method = &quot;lm&quot;, se = FALSE)</code></pre>
+<p><img src="/post/2018-06-14-hypothesis-testing-with-r_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Fit a linear model to estimate the linear relationship between weight and mpg. The relationship is negative and it is statistically significant.</p>
+<pre class="r"><code># library(broom)
+# library(dplyr)
+tidy(lm(mpg ~ wt, data = mtcars))</code></pre>
+<pre><code>##          term  estimate std.error statistic      p.value
+## 1 (Intercept) 37.285126  1.877627 19.857575 8.241799e-19
+## 2          wt -5.344472  0.559101 -9.559044 1.293959e-10</code></pre>
+<pre class="r"><code>obs_slope &lt;- tidy(lm(mpg ~ wt, data = mtcars)) %&gt;% .[2,2]</code></pre>
+<p>In practice, to do inference, we will need to know the distribution of the slope under the null hypothesis, that is there is no relationship between explanatory and response variables.</p>
+<blockquote>
+<p><em><code>pull()</code> function takes a data frame and returns a selected column as a vector (similar to $)</em></p>
+</blockquote>
+<pre class="r"><code>library(infer)
+perm_slopes &lt;- mtcars %&gt;%
+  specify(formula = mpg ~ wt) %&gt;% # specify the linear model
+  hypothesize(null = &quot;independence&quot;) %&gt;% # provide null hypothesis that two variables are independent
+  generate(reps = 100, type = &quot;permute&quot;) %&gt;% # describe how to generate the sampling distribution
+  calculate(stat = &quot;slope&quot;) # calculate the statistic of interest</code></pre>
+<p>Plot the permuted slopes using a histogram and add the observed slope as a vertical line. As you can see, the observed slope does not overlap even one of the 100 permuted slopes, which is another way of finding that p-value is less than 1%. This means, we reject the null hypothesis.</p>
+<pre class="r"><code>ggplot(perm_slopes, aes(stat)) + geom_histogram() + # histogram distribution of slope of null hypothesis
+  geom_vline(xintercept = obs_slope, color = &quot;red&quot;) # add a vertical line for observed slope</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="/post/2018-06-14-hypothesis-testing-with-r_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="a-not-meaningful-relationship" class="section level3">
+<h3>A Not-Meaningful Relationship</h3>
+<p>Now, using <strong>mtcars</strong> data set, let’s look at the relationship between between real axle ratio (<code>drat</code>) and 1/4 mile time (<code>qsec</code>). It seems there is no relationship even without fitting a line.</p>
+<pre class="r"><code>ggplot(mtcars, aes(drat, qsec)) + geom_point()</code></pre>
+<p><img src="/post/2018-06-14-hypothesis-testing-with-r_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Let’s fit a linear model anyway to estimate the linear relationship between <code>drat</code> and <code>qsec</code>. Observing the p-value, we cannot reject the null hypothesis that there is a meaningful relationship between the two variables–unlike the previous model of relationship between weight and mileage.</p>
+<pre class="r"><code>tidy(lm(qsec ~ drat, data = mtcars))</code></pre>
+<pre><code>##          term   estimate std.error statistic      p.value
+## 1 (Intercept) 16.7524663 2.2086713 7.5848617 1.855757e-08
+## 2        drat  0.3048143 0.6076358 0.5016398 6.195826e-01</code></pre>
+<pre class="r"><code>obs_slope &lt;- tidy(lm(qsec ~ drat, data = mtcars)) %&gt;% .[2,2]</code></pre>
+<p>We can go further and visualize the null distribution of the relationship between <code>drat</code> and <code>qsec</code>. Using <strong>infer</strong> package, we estimate 100 permutation of the null slopes.</p>
+<pre class="r"><code>perm_slopes &lt;- mtcars %&gt;%
+  specify(qsec ~ drat) %&gt;%
+  hypothesize(null = &quot;independence&quot;) %&gt;%
+  generate(reps = 100, type = &quot;permute&quot;) %&gt;%
+  calculate(stat = &quot;slope&quot;)</code></pre>
+<p><strong>infer</strong> package does a great job in simulating the null hypothesis. Next, I am going to use <strong>ggplot2</strong> to plot the 100 permuted slopes in a histogram, and add a red vertical line that will represent the observed slope of <code>qsec</code> and <code>drat</code>. You can see that the observed slope overlaps the permuted slopes (null hypothesis), and once again we come to realization that we cannot observe a meaningful relationship between <code>qsec</code> and <code>drat</code> variables in the <strong>mtcars</strong> data set.</p>
+<pre class="r"><code>ggplot(perm_slopes, aes(stat)) + geom_histogram() +
+  geom_vline(xintercept = obs_slope, color = &quot;red&quot;)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="/post/2018-06-14-hypothesis-testing-with-r_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

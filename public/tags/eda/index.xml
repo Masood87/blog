@@ -6,10 +6,21 @@
     <description>Recent content in Eda on Masood Sadat Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 14 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/eda/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Explore Correlation Among Variables with Corrplot</title>
+      <link>/2018/06/14/explore-correlation-among-variables-with-corrplot/</link>
+      <pubDate>Thu, 14 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/06/14/explore-correlation-among-variables-with-corrplot/</guid>
+      <description>Exploring relationship among variables in a data set is never easier with corrplot package and function of the same name. corrplot takes in a correlation matrix and returns a visual representation of that correlation matrix.
+Try it for yourself.
+Install and load corrplot package  install.packages(&amp;quot;corrplot&amp;quot;) library(corrplot) Estimate correlation between all variables of mtcars dataset using cor, and then plot the correlations using corrplot(). You have to specify a method, and there are quite a few of them–here I demonstrate two of them: square and number  mat &amp;lt;- cor(mtcars) corrplot(mat, method = &amp;quot;square&amp;quot;) corrplot(mat, method = &amp;quot;number&amp;quot;) To explore more, see the help (?</description>
+    </item>
     
     <item>
       <title>Selection of Provinces for Monitoring in SAP 2018</title>
