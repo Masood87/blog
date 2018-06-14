@@ -1,5 +1,5 @@
 ---
-title: Collecting Tweets
+title: Collecting Tweets with R
 author: Masood Sadat
 date: '2018-06-14'
 slug: collecting-tweets
