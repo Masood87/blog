@@ -1,7 +1,7 @@
 ---
 title: Collecting Tweets
 author: Masood Sadat
-date: '2018-06-13'
+date: '2018-06-14'
 slug: collecting-tweets
 categories:
   - r tips
@@ -19,38 +19,38 @@ In this post I am going to download tweets using **tweetR** package.
 
 3. Go to RStudio: install and attach **tweetR** package.
 
-```{r echo=TRUE, eval=FALSE}
-# install.packages("twitteR")
-# library(twitteR)
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+install.packages("twitteR")
+library(twitteR)
 ```
 
 4. From step 2, insert **API Key**, **API Secret**, **Access Token**, and **Access Secret** into the following code chunk.
 
-```{r echo=TRUE, eval=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 api_key <- "YOUR_API_KEY"
 api_secret <- "YOUR_API_SECRET"
 access_token <- "YOUR_ACCESS_TOKEN"
 access_secret <- "YOUR_ACCESS_SECRET"
 ```
 
-5. Now, setup the twitter
+5. Now, setup your twitter details with **twitteR**
 
-```{r echo=TRUE, eval=FALSE}
-setup_twitter_oauth(consumer_key = api_key, 
-                    consumer_secret = api_secret, 
-                    access_token=access_token, 
-                    access_secret=access_secret)
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+setup_twitter_oauth(consumer_key = api_key, consumer_secret = api_secret, access_token=access_token, access_secret=access_secret)
 ```
 
-6. Collect tweets... That simple!
+6. Collect tweets of your interest... That simple!
 
-```{r}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 tw_afghanistan <- searchTwitteR(searchString = "#Afghanistan", n = 5)
 ```
 
 At this stage, you will have the tweets in the form of a list. You can check them out like any other list. For example, look at the first tweet `tw_afghanistan[[1]]`.
 
 In the next post, I will write about how to do analysis and visualize your findings. COMING SOON!
+
+
+
 
 
 

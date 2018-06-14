@@ -1,7 +1,7 @@
 ---
 title: Collecting Tweets
 author: Masood Sadat
-date: '2018-06-13'
+date: '2018-06-14'
 slug: collecting-tweets
 categories:
   - r tips
@@ -23,8 +23,8 @@ tags:
 <ol start="3" style="list-style-type: decimal">
 <li>Go to RStudio: install and attach <strong>tweetR</strong> package.</li>
 </ol>
-<pre class="r"><code># install.packages(&quot;twitteR&quot;)
-# library(twitteR)</code></pre>
+<pre class="r"><code>install.packages(&quot;twitteR&quot;)
+library(twitteR)</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>From step 2, insert <strong>API Key</strong>, <strong>API Secret</strong>, <strong>Access Token</strong>, and <strong>Access Secret</strong> into the following code chunk.</li>
 </ol>
@@ -33,9 +33,12 @@ api_secret &lt;- &quot;YOUR_API_SECRET&quot;
 access_token &lt;- &quot;YOUR_ACCESS_TOKEN&quot;
 access_secret &lt;- &quot;YOUR_ACCESS_SECRET&quot;</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li>Now, setup the twitter</li>
+<li>Now, setup your twitter details with <strong>twitteR</strong></li>
 </ol>
-<pre class="r"><code>setup_twitter_oauth(consumer_key = api_key, 
-                    consumer_secret = api_secret, 
-                    access_token=access_token, 
-                    access_secret=access_secret)</code></pre>
+<pre class="r"><code>setup_twitter_oauth(consumer_key = api_key, consumer_secret = api_secret, access_token=access_token, access_secret=access_secret)</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Collect tweets of your interest… That simple!</li>
+</ol>
+<pre class="r"><code>tw_afghanistan &lt;- searchTwitteR(searchString = &quot;#Afghanistan&quot;, n = 5)</code></pre>
+<p>At this stage, you will have the tweets in the form of a list. You can check them out like any other list. For example, look at the first tweet <code>tw_afghanistan[[1]]</code>.</p>
+<p>In the next post, I will write about how to do analysis and visualize your findings. COMING SOON!</p>
