@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Masood Sadat Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Confidence Interval wtih R</title>
+      <link>/2018/06/15/confidence-interval-wtih-r/</link>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/06/15/confidence-interval-wtih-r/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Collecting Tweets with R</title>
@@ -40,9 +49,9 @@ Install and load corrplot package  install.packages(&amp;quot;corrplot&amp;quot;
       <pubDate>Thu, 14 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/06/14/hypothesis-testing-with-r/</guid>
-      <description>A Meaningful Relationship The relatinship between weight (wt) and mileage (mpg) is negative one.
-# library(ggplot2) ggplot(mtcars, aes(wt, mpg)) + geom_point() + geom_smooth(method = &amp;quot;lm&amp;quot;, se = FALSE) Fit a linear model to estimate the linear relationship between weight and mpg. The relationship is negative and it is statistically significant.
-# library(broom) # library(dplyr) tidy(lm(mpg ~ wt, data = mtcars)) ## term estimate std.error statistic p.value ## 1 (Intercept) 37.285126 1.</description>
+      <description>A Meaningful Relationship There seems to be a relatinship between weight (wt) and mileage (mpg) from the mtcars based on observing them on a scatter plot–perhaps a negative one.
+library(ggplot2) ggplot(mtcars, aes(wt, mpg)) + geom_point() Fit a linear model to estimate the relationship between weight and mpg, and tidy the output. Looking at the statistics and p-value, I can reject the null hypothesis (no relationship).
+library(broom) library(dplyr) tidy(lm(mpg ~ wt, data = mtcars)) ## term estimate std.</description>
     </item>
     
     <item>
