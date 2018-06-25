@@ -59,7 +59,7 @@
 
   <article class="article">
     
-    <span class="article-duration">3 min read</span>
+    <span class="article-duration">4 min read</span>
     
 
     <h1 class="article-title">Selection of Provinces for Monitoring in SAP 2018</h1>
@@ -85,20 +85,14 @@
 </div>
 <div id="analysis" class="section level1">
 <h1>Analysis</h1>
-<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    34 obs. of  5 variables:
-##  $ prov.                    : chr  &quot;Badakhshan&quot; &quot;Badghis&quot; &quot;Baghlan&quot; &quot;Balkh&quot; ...
-##  $ failures                 : chr  &quot;0&quot; &quot;3&quot; &quot;1&quot; &quot;3&quot; ...
-##  $ n                        : chr  &quot;216&quot; &quot;210&quot; &quot;341&quot; &quot;415&quot; ...
-##  $ sayara                   : chr  &quot;1&quot; &quot;0&quot; &quot;1&quot; &quot;1&quot; ...
-##  $ proportion of LT failures: chr  &quot;0&quot; &quot;0.014285714&quot; &quot;0.002932551&quot; &quot;0.007228916&quot; ...</code></pre>
-<p>The logic test results are aggregated at the provincial level at this analysis. In addition to the failtures, we look at the provincial sample size and whether the province was monitored or not (by Sayara). The following table shows a snippet of the data used in this section of analysis.</p>
+<p>The logic test results are aggregated at the provincial level for this analysis. In addition to the failtures, we look at the provincial sample size and whether the province was monitored or not (by Sayara). The following table shows part of the data that is used in this analysis.</p>
 <pre class="r"><code>knitr::kable(head(lt))</code></pre>
 <table>
 <thead>
 <tr class="header">
 <th align="left">Provinces</th>
-<th align="left">Logic Test Failures</th>
-<th align="left">Sample Size</th>
+<th align="right">Logic Test Failures</th>
+<th align="right">Sample Size</th>
 <th align="left">Province Monitored</th>
 <th align="right">Percent Failed at Logic Test</th>
 </tr>
@@ -106,51 +100,74 @@
 <tbody>
 <tr class="odd">
 <td align="left">Badakhshan</td>
-<td align="left">0</td>
-<td align="left">216</td>
+<td align="right">0</td>
+<td align="right">216</td>
 <td align="left">Monitored</td>
 <td align="right">0.00</td>
 </tr>
 <tr class="even">
 <td align="left">Badghis</td>
-<td align="left">3</td>
-<td align="left">210</td>
+<td align="right">3</td>
+<td align="right">210</td>
 <td align="left">Not Monitored</td>
 <td align="right">1.43</td>
 </tr>
 <tr class="odd">
 <td align="left">Baghlan</td>
-<td align="left">1</td>
-<td align="left">341</td>
+<td align="right">1</td>
+<td align="right">341</td>
 <td align="left">Monitored</td>
 <td align="right">0.29</td>
 </tr>
 <tr class="even">
 <td align="left">Balkh</td>
-<td align="left">3</td>
-<td align="left">415</td>
+<td align="right">3</td>
+<td align="right">415</td>
 <td align="left">Monitored</td>
 <td align="right">0.72</td>
 </tr>
 <tr class="odd">
 <td align="left">Bamyan</td>
-<td align="left">2</td>
-<td align="left">312</td>
+<td align="right">2</td>
+<td align="right">312</td>
 <td align="left">Not Monitored</td>
 <td align="right">0.64</td>
 </tr>
 <tr class="even">
 <td align="left">Daikundi</td>
-<td align="left">0</td>
-<td align="left">216</td>
+<td align="right">0</td>
+<td align="right">216</td>
 <td align="left">Not Monitored</td>
 <td align="right">0.00</td>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>failure &lt;- group_by(lt, `Province Monitored`) %&gt;% summarise(mean_failure = mean(`Percent Failed at Logic Test`)) %&gt;% spread(`Province Monitored`, mean_failure)</code></pre>
-<p>Looking at the logic test failure rates by province, and disaggregated by whether the provinces are monitored or not, it becomes evident that the monitored provinces have lower rates on average. It is notworthy that monitored provinces were chosen to be monitored because of their bad performance in the previous wave of the survey. Therefore, it is possible that the imrpovement in data quality as inferred from lower logic test failures are because of the monitoring of the fieldwork.</p>
+<p>Looking at the logic test failure rates by province, and disaggregated by whether the provinces are monitored or not, it becomes evident that the monitored provinces have lower rates on average. It is notworthy that monitored provinces were chosen to be monitored because of their bad performance in the previous wave of the survey. Therefore, it is possible that the imrpovement in data quality as inferred from lower logic test failures are because of the monitoring of the fieldwork. In the following graph, the height of the bars indicates the logic test failure rates by province, and the horizontal line indicates the average logic test failure for all provinces in that facet (i.e. monitored or not monitored provinces).</p>
+<pre class="r"><code># calculate the average failure of provinces by monitoring indicator
+failure &lt;- group_by(lt, `Province Monitored`) %&gt;% summarise(mean_failure = mean(`Percent Failed at Logic Test`))
+
+# plot failed percent for each province using column chart. Color columns by monitoring indicator
+ggplot(lt, aes(x = Provinces, y = `Percent Failed at Logic Test`, fill = `Province Monitored`)) + geom_col() + 
+  
+  # separate columns by monitoring indicator. Apply linedraw theme
+  facet_wrap(~`Province Monitored`, scales = &quot;free_x&quot;) + theme_linedraw() + 
+  
+  # modify theme: direction of x-axis labels and remove x-axis title, and remove legend
+  theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1), legend.position = &quot;none&quot;) + labs(x = &quot;&quot;) + 
+  
+  # add horizontal lines that is average failure of provinces by monitoring indicator
+  geom_hline(data = failure, aes(yintercept = mean_failure), col = &quot;navy&quot;)</code></pre>
 <p><img src="/post/2018-06-10-selection-of-provinces-for-monitoring-in-sap-2018_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Ordering by logic test failure rates, we also observe provinces which were not monitored come up at the top.</p>
+<pre class="r"><code># keep provinces with logic test failures
+filter(lt, `Percent Failed at Logic Test` &gt; 0) %&gt;% 
+  
+  # reorder provinces based on their failure rates
+  mutate(Provinces = fct_reorder(factor(Provinces), `Percent Failed at Logic Test`)) %&gt;% 
+  
+  # plot horizontal
+  ggplot(aes(Provinces, `Percent Failed at Logic Test`, fill = `Province Monitored`)) + geom_col() + coord_flip() + labs(fill = &quot;&quot;) + theme_linedraw() + theme(legend.position = &quot;top&quot;) + geom_vline(xintercept = 10.5, col = &quot;navy&quot;)</code></pre>
+<p><img src="/post/2018-06-10-selection-of-provinces-for-monitoring-in-sap-2018_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 
     </div>
@@ -188,9 +205,6 @@
 
 
     
-<script src="/js/math-code.js"></script>
-<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 
     
   </body>

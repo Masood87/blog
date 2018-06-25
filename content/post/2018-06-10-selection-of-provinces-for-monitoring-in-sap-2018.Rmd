@@ -30,29 +30,67 @@ TAF aims to use monitoring to improve the quality of fieldwork and the collected
 # Analysis
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-lt <- read_csv("~/Documents/SAP 2018/Contracts/Sayara/Province selection based on SAP 2017/SAP 2017 LT report by province.csv")
-varnames <- lt[2,] %>% as.character()
-lt <- lt[3:nrow(lt),]
-colnames(lt) <- varnames
-lt <- lt[, c(1, 2, 5, 8, 10)]
-str(lt)
-lt <- mutate(lt, `proportion of LT failures` = round(as.numeric(`proportion of LT failures`)*100, 2), sayara = factor(case_when(sayara == "0" ~ "Not Monitored", sayara == "1" ~ "Monitored"), levels = c("Not Monitored", "Monitored"), ordered = TRUE))
-# lt[[5]] <- lt[[5]] %>% as.numeric() %>% {round(.*100, 2)}
+lt <- read_csv("~/Documents/SAP 2018/Contracts/Sayara/Province selection based on SAP 2017/SAP 2017 LT report by province.csv", skip = 2)
+
+lt <- select(lt, prov., failures, n, sayara, `proportion of LT failures`) %>%
+  mutate(`proportion of LT failures` = round(as.numeric(`proportion of LT failures`)*100, 2),
+         sayara = factor(case_when(sayara == "0" ~ "Not Monitored", sayara == "1" ~ "Monitored"),
+                         levels = c("Not Monitored", "Monitored"), ordered = TRUE))
+
 colnames(lt) <- c("Provinces", "Logic Test Failures", "Sample Size", "Province Monitored", "Percent Failed at Logic Test")
 ```
 
-The logic test results are aggregated at the provincial level at this analysis. In addition to the failtures, we look at the provincial sample size and whether the province was monitored or not (by Sayara). The following table shows a snippet of the data used in this section of analysis. 
+The logic test results are aggregated at the provincial level for this analysis. In addition to the failtures, we look at the provincial sample size and whether the province was monitored or not (by Sayara). The following table shows part of the data that is used in this analysis. 
 
 ```{r}
 knitr::kable(head(lt))
-failure <- group_by(lt, `Province Monitored`) %>% summarise(mean_failure = mean(`Percent Failed at Logic Test`)) %>% spread(`Province Monitored`, mean_failure)
 ```
 
-Looking at the logic test failure rates by province, and disaggregated by whether the provinces are monitored or not, it becomes evident that the monitored provinces have lower rates on average. It is notworthy that monitored provinces were chosen to be monitored because of their bad performance in the previous wave of the survey. Therefore, it is possible that the imrpovement in data quality as inferred from lower logic test failures are because of the monitoring of the fieldwork.
+Looking at the logic test failure rates by province, and disaggregated by whether the provinces are monitored or not, it becomes evident that the monitored provinces have lower rates on average. It is notworthy that monitored provinces were chosen to be monitored because of their bad performance in the previous wave of the survey. Therefore, it is possible that the imrpovement in data quality as inferred from lower logic test failures are because of the monitoring of the fieldwork. In the following graph, the height of the bars indicates the logic test failure rates by province, and the horizontal line indicates the average logic test failure for all provinces in that facet (i.e. monitored or not monitored provinces).
 
-```{r echo=FALSE}
-ggplot(lt, aes(x = Provinces, y = `Percent Failed at Logic Test`, fill = `Province Monitored`)) + geom_col() + facet_wrap(~`Province Monitored`, scales = "free_x") + theme_linedraw() + theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1), legend.position = "none") + labs(x = "") + geom_hline(yintercept = c(failure$`Not Monitored`, failure$Monitored))
+```{r message=FALSE, warning=FALSE}
+# calculate the average failure of provinces by monitoring indicator
+failure <- group_by(lt, `Province Monitored`) %>% summarise(mean_failure = mean(`Percent Failed at Logic Test`))
+
+# plot failed percent for each province using column chart. Color columns by monitoring indicator
+ggplot(lt, aes(x = Provinces, y = `Percent Failed at Logic Test`, fill = `Province Monitored`)) + geom_col() + 
+  
+  # separate columns by monitoring indicator. Apply linedraw theme
+  facet_wrap(~`Province Monitored`, scales = "free_x") + theme_linedraw() + 
+  
+  # modify theme: direction of x-axis labels and remove x-axis title, and remove legend
+  theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1), legend.position = "none") + labs(x = "") + 
+  
+  # add horizontal lines that is average failure of provinces by monitoring indicator
+  geom_hline(data = failure, aes(yintercept = mean_failure), col = "navy")
 ```
+
+Ordering by logic test failure rates, we also observe provinces which were not monitored come up at the top. 
+
+```{r message=FALSE, warning=FALSE}
+# keep provinces with logic test failures
+filter(lt, `Percent Failed at Logic Test` > 0) %>% 
+  
+  # reorder provinces based on their failure rates
+  mutate(Provinces = fct_reorder(factor(Provinces), `Percent Failed at Logic Test`)) %>% 
+  
+  # plot horizontal
+  ggplot(aes(Provinces, `Percent Failed at Logic Test`, fill = `Province Monitored`)) + geom_col() + coord_flip() + labs(fill = "") + theme_linedraw() + theme(legend.position = "top") + geom_vline(xintercept = 10.5, col = "navy")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
