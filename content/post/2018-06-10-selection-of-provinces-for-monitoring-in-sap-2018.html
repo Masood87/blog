@@ -10,15 +10,16 @@ tags:
   - EDA
 ---
 
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
 
 
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>The Asia Foundation (TAF) employs a number of methods to ensure data quality for the Survey of the Afghan People (SAP). The most important quality controls are (1) third party monitoringy, and (2) logic tests. The third party monitoring is carried out on 10% of all surveys by independent companies. The <strong>third party monitoring</strong> started in 2014, and since then Sayara Research has been the implementing partner for this activity. The <strong>logic tests</strong> are a set of internal tools in the form of codes that are used to detects inconsistencies and potentially fraudulent data. In this note, I document the analysis and reasoning behind the selection of 13 provinces for <em>third party monitoring</em>.</p>
+<p>The Asia Foundation (TAF) employs a number of methods to ensure data quality for the Survey of the Afghan People (SAP). The most important quality controls are (1) third party monitoringy, and (2) logic tests. The third party monitoring is carried out on 10% of all surveys by an independent company, and 25% are subject to monitoring from the data collection company. The <strong>third party monitoring</strong> started in 2014, and since then Sayara Research has been the implementing partner for this activity. The <strong>logic tests</strong> are a set of internal tools in the form of codes that are used to detects inconsistencies and potentially fraudulent data. In this note, I document the analysis and reasoning behind the selection of 13 provinces for the <em>third party monitoring</em>, in which logic tests and previous year’s third party monitoring report are used.</p>
 </div>
 <div id="data" class="section level1">
 <h1>Data</h1>
-<p>TAF aims to use monitoring to improve the quality of fieldwork and the collected data, and employs monitoring in the most problematic provinces. In 2017, 13 provinces were monitored, and TAF wants to keep the same number of provinces for 2018 as well. To select 13 most problematic provinces, a number of documents and resources are consulted to finalize the list of provinces. The following are a list of documents and resources consulted for this task:</p>
+<p>TAF aims to use monitoring to improve the quality of fieldwork and data, and employs monitoring in the most problematic provinces. In 2017, 13 provinces were monitored, and TAF wants to keep the same number of provinces for 2018 as well. To select 13 most problematic provinces, a number of documents and resources are consulted to finalize the list of provinces. The following are a list of documents and resources consulted for this task:</p>
 <ol style="list-style-type: decimal">
 <li>Logic test results in 2017</li>
 <li>SAP sample in 2017</li>
@@ -29,86 +30,187 @@ tags:
 <div id="analysis" class="section level1">
 <h1>Analysis</h1>
 <p>The logic test results are aggregated at the provincial level for this analysis. In addition to the failtures, we look at the provincial sample size and whether the province was monitored or not (by Sayara). The following table shows part of the data that is used in this analysis.</p>
-<pre class="r"><code>knitr::kable(head(lt))</code></pre>
-<table>
+<pre><code>## Warning: package &#39;kableExtra&#39; was built under R version 3.4.4</code></pre>
+<table class="table table-striped table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="left">Provinces</th>
-<th align="right">Logic Test Failures</th>
-<th align="right">Sample Size</th>
-<th align="left">Province Monitored</th>
-<th align="right">Percent Failed at Logic Test</th>
+<tr>
+<th style="text-align:left;">
+Provinces
+</th>
+<th style="text-align:center;">
+Training rating
+</th>
+<th style="text-align:center;">
+Direct observation rating
+</th>
+<th style="text-align:center;">
+Logic Test Failures
+</th>
+<th style="text-align:center;">
+Sample Size
+</th>
+<th style="text-align:left;">
+Province Monitored
+</th>
+<th style="text-align:center;">
+Percent Failed at Logic Test
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Badakhshan</td>
-<td align="right">0</td>
-<td align="right">216</td>
-<td align="left">Monitored</td>
-<td align="right">0.00</td>
+<tr>
+<td style="text-align:left;">
+Badakhshan
+</td>
+<td style="text-align:center;">
+1.00
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+216
+</td>
+<td style="text-align:left;">
+Monitored
+</td>
+<td style="text-align:center;">
+0.00
+</td>
 </tr>
-<tr class="even">
-<td align="left">Badghis</td>
-<td align="right">3</td>
-<td align="right">210</td>
-<td align="left">Not Monitored</td>
-<td align="right">1.43</td>
+<tr>
+<td style="text-align:left;">
+Badghis
+</td>
+<td style="text-align:center;">
+1.00
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+210
+</td>
+<td style="text-align:left;">
+Not Monitored
+</td>
+<td style="text-align:center;">
+1.43
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Baghlan</td>
-<td align="right">1</td>
-<td align="right">341</td>
-<td align="left">Monitored</td>
-<td align="right">0.29</td>
+<tr>
+<td style="text-align:left;">
+Baghlan
+</td>
+<td style="text-align:center;">
+0.80
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+341
+</td>
+<td style="text-align:left;">
+Monitored
+</td>
+<td style="text-align:center;">
+0.29
+</td>
 </tr>
-<tr class="even">
-<td align="left">Balkh</td>
-<td align="right">3</td>
-<td align="right">415</td>
-<td align="left">Monitored</td>
-<td align="right">0.72</td>
+<tr>
+<td style="text-align:left;">
+Balkh
+</td>
+<td style="text-align:center;">
+1.00
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+415
+</td>
+<td style="text-align:left;">
+Monitored
+</td>
+<td style="text-align:center;">
+0.72
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Bamyan</td>
-<td align="right">2</td>
-<td align="right">312</td>
-<td align="left">Not Monitored</td>
-<td align="right">0.64</td>
+<tr>
+<td style="text-align:left;">
+Bamyan
+</td>
+<td style="text-align:center;">
+1.00
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+312
+</td>
+<td style="text-align:left;">
+Not Monitored
+</td>
+<td style="text-align:center;">
+0.64
+</td>
 </tr>
-<tr class="even">
-<td align="left">Daikundi</td>
-<td align="right">0</td>
-<td align="right">216</td>
-<td align="left">Not Monitored</td>
-<td align="right">0.00</td>
+<tr>
+<td style="text-align:left;">
+Daikundi
+</td>
+<td style="text-align:center;">
+0.95
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+216
+</td>
+<td style="text-align:left;">
+Not Monitored
+</td>
+<td style="text-align:center;">
+0.00
+</td>
 </tr>
 </tbody>
 </table>
-<p>Looking at the logic test failure rates by province, and disaggregated by whether the provinces are monitored or not, it becomes evident that the monitored provinces have lower rates on average. It is notworthy that monitored provinces were chosen to be monitored because of their bad performance in the previous wave of the survey. Therefore, it is possible that the imrpovement in data quality as inferred from lower logic test failures are because of the monitoring of the fieldwork. In the following graph, the height of the bars indicates the logic test failure rates by province, and the horizontal line indicates the average logic test failure for all provinces in that facet (i.e. monitored or not monitored provinces).</p>
-<pre class="r"><code># calculate the average failure of provinces by monitoring indicator
-failure &lt;- group_by(lt, `Province Monitored`) %&gt;% summarise(mean_failure = mean(`Percent Failed at Logic Test`))
-
-# plot failed percent for each province using column chart. Color columns by monitoring indicator
-ggplot(lt, aes(x = Provinces, y = `Percent Failed at Logic Test`, fill = `Province Monitored`)) + geom_col() + 
-  
-  # separate columns by monitoring indicator. Apply linedraw theme
-  facet_wrap(~`Province Monitored`, scales = &quot;free_x&quot;) + theme_linedraw() + 
-  
-  # modify theme: direction of x-axis labels and remove x-axis title, and remove legend
-  theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1), legend.position = &quot;none&quot;) + labs(x = &quot;&quot;) + 
-  
-  # add horizontal lines that is average failure of provinces by monitoring indicator
-  geom_hline(data = failure, aes(yintercept = mean_failure), col = &quot;navy&quot;)</code></pre>
+<p><em><strong>Monitoring Improves Data Quality.</strong></em> Looking at the logic test failure rates by province, and disaggregated by whether the provinces are monitored or not, it becomes evident that the monitored provinces have lower logic test failure rates on average. This means, the quality of data collected at the provinces which were monitored were better comparatively. Note that the monitored provinces were chosen for monitoring because of being more problematic last year. Therefore, it is possible that the imrpovement in data quality as inferred from lower logic test failures are because of the monitoring of the fieldwork. In the following graph, logic test failure rates are compared between provinces that were monitored and provinces that were not monitored in 2017. The plot also include the average rates for the group in the form of horizontal lines.</p>
 <p><img src="/post/2018-06-10-selection-of-provinces-for-monitoring-in-sap-2018_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Ordering by logic test failure rates, we also observe provinces which were not monitored come up at the top.</p>
-<pre class="r"><code># keep provinces with logic test failures
-filter(lt, `Percent Failed at Logic Test` &gt; 0) %&gt;% 
-  
-  # reorder provinces based on their failure rates
-  mutate(Provinces = fct_reorder(factor(Provinces), `Percent Failed at Logic Test`)) %&gt;% 
-  
-  # plot horizontal
-  ggplot(aes(Provinces, `Percent Failed at Logic Test`, fill = `Province Monitored`)) + geom_col() + coord_flip() + labs(fill = &quot;&quot;) + theme_linedraw() + theme(legend.position = &quot;top&quot;) + geom_vline(xintercept = 10.5, col = &quot;navy&quot;)</code></pre>
+<p><em><strong>No Relation b/w Monitoring Scores and Logic Tests</strong></em> While having monitors in a province appeared to have a robust effect on the logic test outcomes, monitoring scores of the fieldwork training and fieldwork data collection does not appear to have a robust effect on the logic test outcomes. This is a counterintuitive finding. It was expected that better training and better fieldwork scores would translate into better quality data, which is not the case. There could be three plausable explanation for this finding.</p>
+<ol style="list-style-type: decimal">
+<li>The logic tests do not fully capture the data quality.</li>
+<li>The third party monitor’s assessment does not accurately capture the quality of the fieldwork. This could mean poor assessment, or assessments done by different monitors in different provinces are not comparable (e.g. different monitors would judge the same quality differently).</li>
+<li>The sample of monitored provinces is only 13, which is considered small. With small sample size, the amout of information we get is limited and this increases the uncertainty. Therefore, it is possible that we cannot observe meaningful relationship between monitoring scores and the logic test outcomes. Figure below illustrates the correlation between the indicators of interest. The figure shows that the <em>percent failed at logic test</em> have an almost nonexistent relationship with the other two monitoring indicators.</li>
+</ol>
 <p><img src="/post/2018-06-10-selection-of-provinces-for-monitoring-in-sap-2018_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="selection-of-provinces-for-monitoring" class="section level1">
+<h1>Selection of Provinces for Monitoring</h1>
+<p>It appears that the best indicator for the data quality (proxied through logic test failures) is whether third party monitoring was deployed or not. The monitoring assessment did not have a meaningful relationship.</p>
+<p><em><strong>Limitations in the Analysis</strong></em> It is important to acknowledge the available data does not provide a comprehensive picture and predict the quality of the fieldwork. Nonetheless, last year’s experience is the best available information to make an informed decision regarding this year’s survey, which remains the same.</p>
+<p><img src="/post/2018-06-10-selection-of-provinces-for-monitoring-in-sap-2018_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
