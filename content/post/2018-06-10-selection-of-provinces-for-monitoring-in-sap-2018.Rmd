@@ -49,11 +49,11 @@ df <- inner_join(tpm, lt, by = "Provinces"); rm(tpm, lt)
 
 The logic test results are aggregated at the provincial level for this analysis. In addition to the failtures, we look at the provincial sample size and whether the province was monitored or not (by Sayara). The following table shows part of the data that is used in this analysis.
 
-```{r echo=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
 library(kableExtra)
 kable(head(df), format = "html", align = c("l", "c", "c", "c", "c", "l", "c")) %>% 
-  kable_styling(bootstrap_options = c("striped", "hover"), font_size = 13)
+  kable_styling(font_size = 13)
 ```
 
 _**Monitoring Improves Data Quality.**_ Looking at the logic test failure rates by province, and disaggregated by whether the provinces are monitored or not, it becomes evident that the monitored provinces have lower logic test failure rates on average. This means, the quality of data collected at the provinces which were monitored were better comparatively. Note that the monitored provinces were chosen for monitoring because of being more problematic last year. Therefore, it is possible that the imrpovement in data quality as inferred from lower logic test failures are because of the monitoring of the fieldwork. In the following graph, logic test failure rates are compared between provinces that were monitored and provinces that were not monitored in 2017. The plot also include the average rates for the group in the form of horizontal lines.
@@ -82,6 +82,12 @@ _**No Relation b/w Monitoring Scores and Logic Tests**_ While having monitors in
 3. The sample of monitored provinces is only 13, which is considered small. With small sample size, the amout of information we get is limited and this increases the uncertainty. Therefore, it is possible that we cannot observe meaningful relationship between monitoring scores and the logic test outcomes. Figure below illustrates the correlation between the indicators of interest. The figure shows that the _percent failed at logic test_ have an almost nonexistent relationship with the other two monitoring indicators.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+monitoredSelect <- df %>% arrange(desc(`Percent Failed at Logic Test`)) %>%
+  top_n(13) %>% filter(`Province Monitored` == "Monitored") %>% nrow()
+
+selectedProv <- df %>% arrange(desc(`Percent Failed at Logic Test`)) %>%
+  top_n(13) %>% .[[1]]
+
 library(corrplot)
 corrplot(corr = cor(df[, c(2, 3, 7)], use = "pairwise"), 
          type = "upper")
@@ -89,9 +95,11 @@ corrplot(corr = cor(df[, c(2, 3, 7)], use = "pairwise"),
 
 # Selection of Provinces for Monitoring
 
-It appears that the best indicator for the data quality (proxied through logic test failures) is whether third party monitoring was deployed or not. The monitoring assessment did not have a meaningful relationship. 
+Based on last year's results, the best indicator for the data quality (represented by logic test failure rate) is whether third party monitoring was deployed or not. Moreover, the monitoring assessment did not have a meaningful relationship. Listing the most problematic districts (with largest logic test failure rates), irrespective of monitoring, the 13 provinces with largest rates are therefore selected for this year's monitoring. The selected provinces include `r monitoredSelect` provinces that were monitored last year too. The following are the list of 13 provinces selected, and the following plot presents the provinces with their logic test failure rates.
 
-_**Limitations in the Analysis**_ It is important to acknowledge the available data does not provide a comprehensive picture and predict the quality of the fieldwork. Nonetheless, last year's experience is the best available information to make an informed decision regarding this year's survey, which remains the same. 
+> _Selected provinces for monitoring: `r selectedProv`._
+
+_**There are limitations.**_ It is important to acknowledge that the available data does not provide a complete picture and predict the quality of the fieldwork. Nonetheless, last year's experience provides the best available insight into this year's work to make an informed decision regarding the selection of provinces for monitoring purposes. 
 
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 # keep provinces with logic test failures
