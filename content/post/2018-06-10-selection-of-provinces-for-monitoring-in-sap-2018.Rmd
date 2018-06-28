@@ -86,7 +86,7 @@ monitoredSelect <- df %>% arrange(desc(`Percent Failed at Logic Test`)) %>%
   top_n(13) %>% filter(`Province Monitored` == "Monitored") %>% nrow()
 
 selectedProv <- df %>% arrange(desc(`Percent Failed at Logic Test`)) %>%
-  top_n(13) %>% .[[1]]
+  top_n(13) %>% .[[1]] %>% sort
 
 library(corrplot)
 corrplot(corr = cor(df[, c(2, 3, 7)], use = "pairwise"), 
