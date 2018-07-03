@@ -59,7 +59,7 @@
 
   <article class="article">
     
-    <span class="article-duration">3 min read</span>
+    <span class="article-duration">4 min read</span>
     
 
     <h1 class="article-title">A Tutorial for Analysing Survey of the Afghan People in R</h1>
@@ -80,7 +80,7 @@
 <pre class="r"><code># install.packages(&quot;survey&quot;) # install first if you haven&#39;t
 library(survey)
 sap &lt;- load(&quot;sap.Rda&quot;)
-sap.w svydesign(id = ~1, data = sap[!is.na(sap$MergeWgt10), ], weights = ~MergeWgt10) # simple random sampling</code></pre>
+sap.w &lt;- svydesign(id = ~1, data = sap[!is.na(sap$MergeWgt10), ], weights = ~MergeWgt10) # simple random sampling</code></pre>
 </div>
 <div id="survey-analysis-with-r" class="section level2">
 <h2>2 Survey Analysis with R</h2>
@@ -88,7 +88,7 @@ sap.w svydesign(id = ~1, data = sap[!is.na(sap$MergeWgt10), ], weights = ~MergeW
 <div id="reading-data" class="section level3">
 <h3>2.1 Reading Data</h3>
 <p>The survey data is made available in <strong>.Rda</strong> (R), <strong>.dta</strong> (Stata) and <strong>.sav</strong> (SPSS) file format. In this tutorial, we go over how to carry out some data manipulation and analysis that is used in the Survey report using R. Ideally if you are using R, you would download <strong>.Rda</strong> file format of the data, in which case you will use `` function to open it in R or <strong>RStudio</strong>.</p>
-<pre class="r"><code># load(file = &quot;file.Rda&quot;)</code></pre>
+<pre class="r"><code>load(file = &quot;file.Rda&quot;)</code></pre>
 <p>If you have the <strong>.dta</strong> (Stata) file format, there are <strong>haven</strong>, <strong>foreign</strong>, and <strong>readstata13</strong> packages that are available and I have used. I suggest to use <strong>readstata13</strong>, because it preserves the labelled variables as factors. Keeping the order becomes very important when you produce tables or graphs; otherwise, you will get categories sorted by alphabetical order, which is not desireable in this case.</p>
 <p>Let’s start by installing the <strong>readstata13</strong> pacakges, then attaching it.</p>
 <pre class="r"><code>install.packages(&quot;readstata13&quot;)
@@ -101,6 +101,49 @@ read_spss(&quot;file.sav&quot;)</code></pre>
 <div id="tabulations-and-cross-tabulations" class="section level3">
 <h3>2.2 Tabulations and Cross-tabulations</h3>
 <p>Preparing a table of frequencies or percentages, which is know as tabulation, is the most widely used method in the survey report given the categorical nature of most of the survey questions. For example, we look at the percentage of people</p>
+<pre class="r"><code>svytable(formula = ~x4+m8, design = sap.w)</code></pre>
+<pre><code>##                                         m8
+## x4                                              2006        2007
+##   right direction                        2757.558713 2647.657629
+##   wrong direction                        1311.014697 1485.839201
+##   some in right, some in wrong direction 1830.548550 1587.539643
+##   refused                                  60.488206   72.592973
+##   don&#39;t know                              266.389834  469.370554
+##                                         m8
+## x4                                              2008        2009
+##   right direction                        2473.381144 2712.302584
+##   wrong direction                        2110.778431 1884.679871
+##   some in right, some in wrong direction 1514.596964 1316.456412
+##   refused                                  72.709273   57.014838
+##   don&#39;t know                              421.534188  435.546296
+##                                         m8
+## x4                                              2010        2011
+##   right direction                        3019.636861 2933.022875
+##   wrong direction                        1746.860766 2199.528812
+##   some in right, some in wrong direction 1395.034384 1084.365722
+##   refused                                  28.295505    6.197469
+##   don&#39;t know                              277.172484  124.885122
+##                                         m8
+## x4                                              2012        2013
+##   right direction                        4080.913614 4853.933883
+##   wrong direction                        2478.309670 3155.379753
+##   some in right, some in wrong direction 1219.720991    0.000000
+##   refused                                  13.583711   10.101738
+##   don&#39;t know                              127.472014  400.584626
+##                                         m8
+## x4                                              2014        2015
+##   right direction                        4762.853482 3271.684924
+##   wrong direction                        3522.370351 5120.209488
+##   some in right, some in wrong direction    0.000000    0.000000
+##   refused                                  31.198529   50.486558
+##   don&#39;t know                              389.577639  469.619030
+##                                         m8
+## x4                                              2016        2017
+##   right direction                        3404.462817 2978.248802
+##   wrong direction                        7657.596302 5559.589402
+##   some in right, some in wrong direction    0.000000    0.000000
+##   refused                                  65.535146   69.580475
+##   don&#39;t know                              495.405735  478.581320</code></pre>
 </div>
 </div>
 

@@ -11,6 +11,14 @@ tags:
 urlcolor: blue
 ---
 
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(feather)
+library(survey)
+sap <- read_feather("~/Documents/SAP 2017/Data/TAF Merge W1-12 Client Version v5.1.feather")
+sap.w <- svydesign(id = ~1, data = sap[!is.na(sap$MergeWgt10), ], weights = ~MergeWgt10)
+```
+
+
 ## 1 About the Survey of the Afghan People
 
 Since 2006, The Asia Foundation conducts [_**the Survey of the Afghan People**_](https://asiafoundation.org/where-we-work/afghanistan/survey/), a nationally-representative annual survey. The Survey reflects perceptions about a broad range of topics including security, development, governance, service delivery, women’s rights, and migration. The Survey is broadly used by policy makers, academics, non-governmental organizations working in and on Afghanistan. The Foundation make the Survey's data public on its [website](https://asiafoundation.org/where-we-work/afghanistan/survey/download-data-form/).
@@ -25,7 +33,7 @@ To apply survey weights in R require using special treatment of general estimati
 # install.packages("survey") # install first if you haven't
 library(survey)
 sap <- load("sap.Rda")
-sap.w svydesign(id = ~1, data = sap[!is.na(sap$MergeWgt10), ], weights = ~MergeWgt10) # simple random sampling
+sap.w <- svydesign(id = ~1, data = sap[!is.na(sap$MergeWgt10), ], weights = ~MergeWgt10) # simple random sampling
 ```
 
 ## 2 Survey Analysis with R
@@ -34,14 +42,10 @@ I have broken down this post into (1) reading data, (2) tabulations and cross-ta
 
 ### 2.1 Reading Data
 
-```{r echo=FALSE, message=FALSE, include=FALSE}
-# setwd("~/Documents/SAP 2017/Data")
-```
-
 The survey data is made available in **.Rda** (R), **.dta** (Stata) and **.sav** (SPSS) file format. In this tutorial, we go over how to carry out some data manipulation and analysis that is used in the Survey report using R. Ideally if you are using R, you would download **.Rda** file format of the data, in which case you will use `` function to open it in R or **RStudio**. 
 
 ```{r message=FALSE, warning=FALSE, include=TRUE, eval=FALSE}
-# load(file = "file.Rda")
+load(file = "file.Rda")
 ```
 
 If you have the **.dta** (Stata) file format, there are **haven**, **foreign**, and **readstata13** packages that are available and I have used. I suggest to use **readstata13**, because it preserves the labelled variables as factors. Keeping the order becomes very important when you produce tables or graphs; otherwise, you will get categories sorted by alphabetical order, which is not desireable in this case.
@@ -64,4 +68,7 @@ read_spss("file.sav")
 
 Preparing a table of frequencies or percentages, which is know as tabulation, is the most widely used method in the survey report given the categorical nature of most of the survey questions. For example, we look at the percentage of people 
 
+```{r}
+svytable(formula = ~x4+m8, design = sap.w)
+```
 
