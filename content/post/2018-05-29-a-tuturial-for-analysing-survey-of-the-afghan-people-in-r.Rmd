@@ -68,7 +68,12 @@ read_spss("file.sav")
 
 Preparing a table of frequencies or percentages, which is know as tabulation, is the most widely used method in the survey report given the categorical nature of most of the survey questions. For example, we look at the percentage of people 
 
-```{r}
-svytable(formula = ~x4+m8, design = sap.w)
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+svytable(formula = ~x4+m8, design = sap.w) %>% # weighted cross-tabulation of x4 by m8
+  prop.table(2) %>% # column percentages
+  {.*100} %>% # multiply values by 100
+  round(1) %>% # round the values to one decimal point
+  knitr::kable() # present in a nice table
 ```
 

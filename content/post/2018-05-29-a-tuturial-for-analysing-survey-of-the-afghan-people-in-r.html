@@ -45,48 +45,107 @@ read_spss(&quot;file.sav&quot;)</code></pre>
 <div id="tabulations-and-cross-tabulations" class="section level3">
 <h3>2.2 Tabulations and Cross-tabulations</h3>
 <p>Preparing a table of frequencies or percentages, which is know as tabulation, is the most widely used method in the survey report given the categorical nature of most of the survey questions. For example, we look at the percentage of people</p>
-<pre class="r"><code>svytable(formula = ~x4+m8, design = sap.w)</code></pre>
-<pre><code>##                                         m8
-## x4                                              2006        2007
-##   right direction                        2757.558713 2647.657629
-##   wrong direction                        1311.014697 1485.839201
-##   some in right, some in wrong direction 1830.548550 1587.539643
-##   refused                                  60.488206   72.592973
-##   don&#39;t know                              266.389834  469.370554
-##                                         m8
-## x4                                              2008        2009
-##   right direction                        2473.381144 2712.302584
-##   wrong direction                        2110.778431 1884.679871
-##   some in right, some in wrong direction 1514.596964 1316.456412
-##   refused                                  72.709273   57.014838
-##   don&#39;t know                              421.534188  435.546296
-##                                         m8
-## x4                                              2010        2011
-##   right direction                        3019.636861 2933.022875
-##   wrong direction                        1746.860766 2199.528812
-##   some in right, some in wrong direction 1395.034384 1084.365722
-##   refused                                  28.295505    6.197469
-##   don&#39;t know                              277.172484  124.885122
-##                                         m8
-## x4                                              2012        2013
-##   right direction                        4080.913614 4853.933883
-##   wrong direction                        2478.309670 3155.379753
-##   some in right, some in wrong direction 1219.720991    0.000000
-##   refused                                  13.583711   10.101738
-##   don&#39;t know                              127.472014  400.584626
-##                                         m8
-## x4                                              2014        2015
-##   right direction                        4762.853482 3271.684924
-##   wrong direction                        3522.370351 5120.209488
-##   some in right, some in wrong direction    0.000000    0.000000
-##   refused                                  31.198529   50.486558
-##   don&#39;t know                              389.577639  469.619030
-##                                         m8
-## x4                                              2016        2017
-##   right direction                        3404.462817 2978.248802
-##   wrong direction                        7657.596302 5559.589402
-##   some in right, some in wrong direction    0.000000    0.000000
-##   refused                                  65.535146   69.580475
-##   don&#39;t know                              495.405735  478.581320</code></pre>
+<pre class="r"><code>library(dplyr)
+svytable(formula = ~x4+m8, design = sap.w) %&gt;% # weighted cross-tabulation of x4 by m8
+  prop.table(2) %&gt;% # column percentages
+  {.*100} %&gt;% # multiply values by 100
+  round(1) %&gt;% # round the values to one decimal point
+  knitr::kable() # present in a nice table</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">2006</th>
+<th align="right">2007</th>
+<th align="right">2008</th>
+<th align="right">2009</th>
+<th align="right">2010</th>
+<th align="right">2011</th>
+<th align="right">2012</th>
+<th align="right">2013</th>
+<th align="right">2014</th>
+<th align="right">2015</th>
+<th align="right">2016</th>
+<th align="right">2017</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>right direction</td>
+<td align="right">44.3</td>
+<td align="right">42.3</td>
+<td align="right">37.5</td>
+<td align="right">42.3</td>
+<td align="right">46.7</td>
+<td align="right">46.2</td>
+<td align="right">51.5</td>
+<td align="right">57.6</td>
+<td align="right">54.7</td>
+<td align="right">36.7</td>
+<td align="right">29.3</td>
+<td align="right">32.8</td>
+</tr>
+<tr class="even">
+<td>wrong direction</td>
+<td align="right">21.1</td>
+<td align="right">23.7</td>
+<td align="right">32.0</td>
+<td align="right">29.4</td>
+<td align="right">27.0</td>
+<td align="right">34.6</td>
+<td align="right">31.3</td>
+<td align="right">37.5</td>
+<td align="right">40.5</td>
+<td align="right">57.5</td>
+<td align="right">65.9</td>
+<td align="right">61.2</td>
+</tr>
+<tr class="odd">
+<td>some in right, some in wrong direction</td>
+<td align="right">29.4</td>
+<td align="right">25.3</td>
+<td align="right">23.0</td>
+<td align="right">20.6</td>
+<td align="right">21.6</td>
+<td align="right">17.1</td>
+<td align="right">15.4</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td>refused</td>
+<td align="right">1.0</td>
+<td align="right">1.2</td>
+<td align="right">1.1</td>
+<td align="right">0.9</td>
+<td align="right">0.4</td>
+<td align="right">0.1</td>
+<td align="right">0.2</td>
+<td align="right">0.1</td>
+<td align="right">0.4</td>
+<td align="right">0.6</td>
+<td align="right">0.6</td>
+<td align="right">0.8</td>
+</tr>
+<tr class="odd">
+<td>don’t know</td>
+<td align="right">4.3</td>
+<td align="right">7.5</td>
+<td align="right">6.4</td>
+<td align="right">6.8</td>
+<td align="right">4.3</td>
+<td align="right">2.0</td>
+<td align="right">1.6</td>
+<td align="right">4.8</td>
+<td align="right">4.5</td>
+<td align="right">5.3</td>
+<td align="right">4.3</td>
+<td align="right">5.3</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
