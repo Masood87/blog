@@ -4,10 +4,10 @@ author: 'Masood Sadat'
 date: '2018-06-05'
 slug: a-tutorial-for-analysing-survey-of-the-afghan-people-in-r
 categories:
-  - Afghanistan
+  - afghanistan
+  - r tips
 tags:
   - AfghanSurvey
-  - R tips
 urlcolor: blue
 ---
 

@@ -7,7 +7,6 @@ categories:
   - git
 tags:
   - git
-urlcolor: blue
 ---
 
 Did you know you can upload almost anything on [**Github.com**](https://github.come)?

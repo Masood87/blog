@@ -1,6 +1,5 @@
 ---
-title: 'Perceptions About Electricity in Afghanistan: Insights From the Survey of
-  the Afghan People'
+title: 'Perceptions About Electricity in Afghanistan: Insights From the Survey of the Afghan People'
 author: 'Masood Sadat'
 date: '2018-05-10'
 slug: perceptions-about-electricity-in-afghanistan
