@@ -20,8 +20,8 @@ tags:
 </div>
 <div id="basics" class="section level1">
 <h1>Basics</h1>
-<div id="arithmetic" class="section level3">
-<h3>Arithmetic</h3>
+<div id="arithmetic" class="section level2">
+<h2>Arithmetic</h2>
 <p><strong>Arthmetic operators</strong></p>
 <ul>
 <li>Addition: +</li>
@@ -40,21 +40,23 @@ tags:
 <pre class="r"><code>2018 %/% 5</code></pre>
 <pre><code>## [1] 403</code></pre>
 </div>
-<div id="assignment" class="section level3">
-<h3>Assignment</h3>
+<div id="assignment" class="section level2">
+<h2>Assignment</h2>
 <p>Assign 4 to an object <strong>x</strong></p>
-<p><code>r   x &lt;- 4 # assign 4 to x   x # prints x</code></p>
-<p><code>## [1] 4</code></p>
+<pre class="r"><code>x &lt;- 4 # assign 4 to x
+x # prints x</code></pre>
+<pre><code>## [1] 4</code></pre>
 <p>Use object <strong>x</strong> in calculation</p>
 <pre class="r"><code>y &lt;- 2
 x*y</code></pre>
 <pre><code>## [1] 8</code></pre>
 <p>Assign result of calculation to another object <strong>z</strong></p>
-<p><code>r   z &lt;- x*y   z</code></p>
-<p><code>## [1] 8</code></p>
+<pre class="r"><code>z &lt;- x*y
+z</code></pre>
+<pre><code>## [1] 8</code></pre>
 </div>
-<div id="data-types-in-r" class="section level3">
-<h3>Data types in R</h3>
+<div id="data-types-in-r" class="section level2">
+<h2>Data types in R</h2>
 <ul>
 <li><strong>numerics:</strong> Decimals values like 4.5</li>
 <li><strong>integers:</strong> Natural numbers like 4. Integers are also numerics.</li>
@@ -76,31 +78,39 @@ my_logical   &lt;- TRUE</code></pre>
 <pre class="r"><code>class(my_logical)</code></pre>
 <pre><code>## [1] &quot;logical&quot;</code></pre>
 </div>
-<div id="data-objects-in-r" class="section level3">
-<h3>Data objects in R</h3>
+<div id="data-objects-in-r" class="section level2">
+<h2>Data objects in R</h2>
 <p>We have multiple types of objects in R:</p>
 <ul>
-<li><strong>Scalars:</strong> <em>Scalars are singular element objects, like one number or one character (we don’t talk about it in this course)</em> - <strong>Vectors:</strong> <em>A sequence (collection) of data with one dimension, that is length</em> - <strong>Matrices:</strong> <em>A collection of same data type arranged into rows and columns</em> - <strong>Arrays:</strong> <em>Arrays are similar to matrices but can have more than two dimensions (we don’t talk about it in this course)</em></li>
+<li><strong>Scalars:</strong> <em>Scalars are singular element objects, like one number or one character (we don’t talk about it in this course)</em></li>
+<li><strong>Vectors:</strong> <em>A sequence (collection) of data with one dimension, that is length</em></li>
+<li><strong>Matrices:</strong> <em>A collection of same data type arranged into rows and columns</em></li>
+<li><strong>Arrays:</strong> <em>Arrays are similar to matrices but can have more than two dimensions (we don’t talk about it in this course)</em></li>
 <li><strong>Data Frames:</strong> <em>A collection of data points arranged into rows and columns (like matrices) but each column can have different data type (unlike matrices)</em></li>
 <li><strong>Lists:</strong> <em>A collection/list of data objects, such as vectors, matrices, data frames, or even other lists</em></li>
 </ul>
+<div class="figure">
+<img src="/post/2018-07-12-day-1-introduction-to-r_files/objects.png" style="width:100.0%" />
+
+</div>
 </div>
 </div>
 <div id="vectors" class="section level1">
 <h1>Vectors</h1>
-<p><strong>Formal definition:</strong> Vectors are one-dimension arrays that can hold numeric data, character data, or logical data.</p>
-<p><strong>In other words</strong>, a vector is a sequence (or set) of data points:</p>
-<p>For example, a <strong>numeric</strong> vector looks like this: <em>1, 2.1, -4, 6.8, 2, -1</em>. A <strong>character</strong> vector looks like this: <em>“Kabul”, “India”, “Boat”, “5”, “.”</em>. A <strong>logical</strong> vector looks like this: <em>FALSE, TRUE, TRUE, FALSE, TRUE</em>.</p>
+<p>Vectors are one-dimension arrays that can hold numeric data, character data, or logical data. In other words, a vector is a sequence (or set) of data points.</p>
+<p>For example, a <strong>numeric</strong> vector hold numeric data and looks like this: <em>1, 2.1, -4, 6.8, 2, -1</em>. A <strong>character</strong> vector holds character data looks like this: <em>“Kabul”, “India”, “Boat”, “5”, “.”</em>. A <strong>logical</strong> vector holds logical data and looks like this: <em>FALSE, TRUE, TRUE, FALSE, TRUE</em>.</p>
 <p>There are special functions that create a vector. For example:</p>
-<p><code>r   1:4</code></p>
-<p><code>## [1] 1 2 3 4</code></p>
+<pre class="r"><code>1:4</code></pre>
+<pre><code>## [1] 1 2 3 4</code></pre>
 <pre class="r"><code>rep(&quot;hello&quot;, 10) # repeat &quot;hello&quot;, 10 times</code></pre>
 <pre><code>##  [1] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
 ##  [9] &quot;hello&quot; &quot;hello&quot;</code></pre>
 <p>In general, we create a vector with the combine function <strong>c()</strong></p>
-<p><code>r   numeric_vector &lt;- c(1, 2.1, -4, 6.8, 2, -1)   character_vector &lt;- c(&quot;Kabul&quot;, &quot;India&quot;, &quot;Boat&quot;, &quot;5&quot;, &quot;.&quot;)   boolean_vector &lt;- c(FALSE, TRUE, TRUE, FALSE, TRUE)</code></p>
-<div id="vectors-arithmetic" class="section level3">
-<h3>Vectors Arithmetic</h3>
+<pre class="r"><code>numeric_vector &lt;- c(1, 2.1, -4, 6.8, 2, -1)
+character_vector &lt;- c(&quot;Kabul&quot;, &quot;India&quot;, &quot;کشتی&quot;, &quot;5&quot;, &quot;.&quot;)
+boolean_vector &lt;- c(FALSE, TRUE, TRUE, FALSE, TRUE)</code></pre>
+<div id="vectors-arithmetic" class="section level2">
+<h2>Vectors Arithmetic</h2>
 <p>Element by element operation</p>
 <pre class="r"><code>A &lt;- c(1, 2, 3)
 B &lt;- c(10, 10, 10)
@@ -108,13 +118,9 @@ A + B</code></pre>
 <pre><code>## [1] 11 12 13</code></pre>
 <pre class="r"><code>A / B</code></pre>
 <pre><code>## [1] 0.1 0.2 0.3</code></pre>
-<pre class="r"><code>A * B</code></pre>
-<pre class="r"><code>B - A</code></pre>
-<pre class="r"><code>B %% A</code></pre>
-<pre class="r"><code>B ^ A</code></pre>
 </div>
-<div id="vector-index" class="section level3">
-<h3>Vector index</h3>
+<div id="vector-index" class="section level2">
+<h2>Vector index</h2>
 <p>A vector have many characteristics, such as <strong>class</strong>, <strong>length</strong>, and elements. Lenght of a vector is number of elements a vector has, irrespective of its class.</p>
 <pre class="r"><code>A &lt;- c(&quot;Kabul&quot;, &quot;Mazar&quot;, &quot;Herat&quot;, &quot;Jalalabad&quot;, &quot;Kandahar&quot;)
 length(A)</code></pre>
@@ -149,25 +155,28 @@ B</code></pre>
 <p>Matrix is its own class. How do we check class of an object?</p>
 <pre class="r"><code>class(A)
 class(B)</code></pre>
-<div id="matrix-index" class="section level3">
-<h3>Matrix index</h3>
+<div id="matrix-index" class="section level2">
+<h2>Matrix index</h2>
 <p>Vectors had one dimension. Matrices have two dimensions. Consistent with number of dimensions, matrix indeces also have two values.</p>
 <p>Let’s look at matrix A:</p>
-<p><code>r   A</code></p>
-<p><code>##      [,1] [,2] [,3]   ## [1,]    1    4    7   ## [2,]    2    5    8   ## [3,]    3    6    9</code></p>
+<pre class="r"><code>A</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
 <p>How can we call value in second column and second row?</p>
-<p><code>r   A[2, 2]</code></p>
-<p><code>## [1] 5</code></p>
+<pre class="r"><code>A[2, 2]</code></pre>
+<pre><code>## [1] 5</code></pre>
 <p>How can we call all elements of second column?</p>
-<p><code>r   A[, 2]</code></p>
-<p><code>## [1] 4 5 6</code></p>
+<pre class="r"><code>A[, 2]</code></pre>
+<pre><code>## [1] 4 5 6</code></pre>
 <p>How do we call all elements of first row?</p>
-<p><code>r   A[1, ]</code></p>
-<p><code>## [1] 1 4 7</code></p>
+<pre class="r"><code>A[1, ]</code></pre>
+<pre><code>## [1] 1 4 7</code></pre>
 <p>Practice a little bit more with indexing matrices with yourself. It is both very useful and super cool.</p>
 </div>
-<div id="matrix-arithmetic" class="section level3">
-<h3>Matrix Arithmetic</h3>
+<div id="matrix-arithmetic" class="section level2">
+<h2>Matrix Arithmetic</h2>
 <p>Matrix arithmetic resembles vector arithmetic. Let’s look at a few examples to understand.</p>
 <pre class="r"><code>A &lt;- matrix(1:9, nrow = 3)
 B &lt;- matrix(11:19, nrow = 3)
@@ -198,8 +207,8 @@ A</code></pre>
 ## [2,]   24   75  144
 ## [3,]   39   96  171</code></pre>
 </div>
-<div id="joining-matrices" class="section level3">
-<h3>Joining matrices</h3>
+<div id="joining-matrices" class="section level2">
+<h2>Joining matrices</h2>
 <p>There are two ways to join matrices: - <strong>rbind:</strong> add new rows - <strong>cbind:</strong> add new columns</p>
 <p>In <strong>row bind</strong>, we add one matrix on top of another matrix</p>
 <div class="figure">
@@ -212,10 +221,21 @@ A</code></pre>
 
 </div>
 <p>Let’s join matrix A and B, once by row and once by column:</p>
-<p><code>r   A &lt;- matrix(1:9, nrow = 3)   B &lt;- matrix(11:19, nrow = 3)   rbind(A, B)</code></p>
-<p><code>##      [,1] [,2] [,3]   ## [1,]    1    4    7   ## [2,]    2    5    8   ## [3,]    3    6    9   ## [4,]   11   14   17   ## [5,]   12   15   18   ## [6,]   13   16   19</code></p>
-<p><code>r   cbind(A, B)</code></p>
-<p><code>##      [,1] [,2] [,3] [,4] [,5] [,6]   ## [1,]    1    4    7   11   14   17   ## [2,]    2    5    8   12   15   18   ## [3,]    3    6    9   13   16   19</code></p>
+<pre class="r"><code>A &lt;- matrix(1:9, nrow = 3)
+B &lt;- matrix(11:19, nrow = 3)
+rbind(A, B)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+## [4,]   11   14   17
+## [5,]   12   15   18
+## [6,]   13   16   19</code></pre>
+<pre class="r"><code>cbind(A, B)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    1    4    7   11   14   17
+## [2,]    2    5    8   12   15   18
+## [3,]    3    6    9   13   16   19</code></pre>
 <p>Switch A and B’s position in <strong>rbind()</strong> and <strong>cbind()</strong> and find out what happens.</p>
 <pre class="r"><code>rbind(B, A)
 cbind(B, A)</code></pre>
@@ -279,8 +299,8 @@ cbind(B, A)</code></pre>
 ##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
 ##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
 ##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
-<div id="creating-data-frame" class="section level3">
-<h3>Creating data frame</h3>
+<div id="creating-data-frame" class="section level2">
+<h2>Creating data frame</h2>
 <p>Data frames can be created in multiple ways. Let’s see a few cases.</p>
 <ul>
 <li><em>data frame from matrix</em></li>
@@ -315,8 +335,8 @@ read.csv(&quot;~/Documents/PRSO/Programs/Data Analysis with R/Day 1/Afg_major_ci
 ## 4 4       4 Jalalabad                 0.356
 ## 5 5       5  Kandahar                 0.557</code></pre>
 </div>
-<div id="data-frame-index" class="section level3">
-<h3>Data frame index</h3>
+<div id="data-frame-index" class="section level2">
+<h2>Data frame index</h2>
 <p>Data frame indeces are largely the same as matrices: we call row number and column number in that order inside “[ ]”.</p>
 <p>Let’s see Kabul’s population which is the first row in the <strong>Afg_major_cities</strong> data frame.</p>
 <pre class="r"><code>Afg_major_cities[1, ]</code></pre>
@@ -337,8 +357,8 @@ read.csv(&quot;~/Documents/PRSO/Programs/Data Analysis with R/Day 1/Afg_major_ci
 <pre><code>## [1] Herat
 ## Levels: Herat Jalalabad Kabul Kandahar Mazar</code></pre>
 </div>
-<div id="column-and-row-names" class="section level3">
-<h3>Column and Row Names</h3>
+<div id="column-and-row-names" class="section level2">
+<h2>Column and Row Names</h2>
 <p>Most data are stored in data frame and it is important to assign appropriate names to columns (and sometiems rows) to help recognize them.</p>
 <p>Let’s start by looking at the column names and row names of our data frame using <strong>colnames()</strong> and <strong>rownames()</strong> functions.</p>
 <pre class="r"><code>colnames(Afg_major_cities)</code></pre>
@@ -417,28 +437,16 @@ my_list</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>2 == 1</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<p>We can use relational operators with vectors too, which output boolean vectors.</p>
+<p>We can use relational operators with vectors too, which <strong>output boolean vectors</strong>.</p>
 <p>For example:</p>
 <pre class="r"><code>A &lt;- c(1, 4, 2)
 B &lt;- c(3, 3, 1)
 A &gt;= B</code></pre>
 <pre><code>## [1] FALSE  TRUE  TRUE</code></pre>
-<p><strong>NOTE:</strong> If one vector is shorter, the elements of shorter vector is <em>recycled</em>.</p>
+<p><strong>NOTE:</strong> If one vector is shorter, the elements of shorter vector is <em>recycled</em>. For example, the shorter vector has three elements (3,2,1), which will be recycled to five elements (3,2,1,<strong>3,2</strong>).</p>
 <p>For example:</p>
 <pre class="r"><code>A &lt;- c(1, 4, 2, 5, 2, 2)
-B &lt;- c(3, 3, 1)
-A &gt;= B # Vector B becomes c(3, 3, 1, 3, 3, 1)</code></pre>
-<pre><code>## [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE</code></pre>
-</div>
-<div id="logical-operators" class="section level1">
-<h1>Logical Operators</h1>
-<ul>
-<li><code>!</code> Logical NOT</li>
-<li><code>&amp;</code> Element-wise logical AND</li>
-<li><code>|</code> Element-wise logical OR</li>
-</ul>
-<div class="figure">
-<img src="/post/2018-07-12-day-1-introduction-to-r_files/and%20or.png" style="width:100.0%" />
-
-</div>
+B &lt;- c(3, 2, 1)
+A &gt;= B # Vector B becomes c(3, 2, 1, 3, 2, 1)</code></pre>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
 </div>

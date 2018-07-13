@@ -15,7 +15,7 @@ tags:
 
 # Basics
 
-### Arithmetic
+## Arithmetic
 
 **Arthmetic operators**
   
@@ -36,11 +36,11 @@ tags:
 ```
 
 
-### Assignment
+## Assignment
 
 Assign 4 to an object **x**
   
-  ```{r}
+```{r}
 x <- 4 # assign 4 to x
 x # prints x
 ```
@@ -54,12 +54,12 @@ x*y
 
 Assign result of calculation to another object **z**
   
-  ```{r}
+```{r}
 z <- x*y
 z
 ```
 
-### Data types in R
+## Data types in R
 
 - **numerics:** Decimals values like 4.5
 - **integers:** Natural numbers like 4. Integers are also numerics.
@@ -84,29 +84,28 @@ class(my_character)
 class(my_logical)
 ```
 
-### Data objects in R
+## Data objects in R
 
 We have multiple types of objects in R:
   
-  - **Scalars:** _Scalars are singular element objects, like one number or one character (we don't talk about it in this course)_
-                                                                                          - **Vectors:** _A sequence (collection) of data with one dimension, that is length_
-                                                                                          - **Matrices:** _A collection of same data type arranged into rows and columns_
-                                                                                          - **Arrays:** _Arrays are similar to matrices but can have more than two dimensions (we don't talk about it in this course)_
+- **Scalars:** _Scalars are singular element objects, like one number or one character (we don't talk about it in this course)_
+- **Vectors:** _A sequence (collection) of data with one dimension, that is length_
+- **Matrices:** _A collection of same data type arranged into rows and columns_
+- **Arrays:** _Arrays are similar to matrices but can have more than two dimensions (we don't talk about it in this course)_
 - **Data Frames:** _A collection of data points arranged into rows and columns (like matrices) but each column can have different data type (unlike matrices)_
 - **Lists:** _A collection/list of data objects, such as vectors, matrices, data frames, or even other lists_
 
+![](/post/2018-07-12-day-1-introduction-to-r_files/objects.png){width=100%}
 
 # Vectors
 
-**Formal definition:** Vectors are one-dimension arrays that can hold numeric data, character data, or logical data.
-
-**In other words**, a vector is a sequence (or set) of data points:
+Vectors are one-dimension arrays that can hold numeric data, character data, or logical data. In other words, a vector is a sequence (or set) of data points.
   
-  For example, a **numeric** vector looks like this: _1, 2.1, -4, 6.8, 2, -1_. A **character** vector looks like this: _"Kabul", "India", "Boat", "5", "."_. A **logical** vector looks like this: _FALSE, TRUE, TRUE, FALSE, TRUE_.
+For example, a **numeric** vector hold numeric data and looks like this: _1, 2.1, -4, 6.8, 2, -1_. A **character** vector holds character data looks like this: _"Kabul", "India", "Boat", "5", "."_. A **logical** vector holds logical data and looks like this: _FALSE, TRUE, TRUE, FALSE, TRUE_.
 
 There are special functions that create a vector. For example:
   
-  ```{r}
+```{r}
 1:4
 ```
 
@@ -116,13 +115,13 @@ rep("hello", 10) # repeat "hello", 10 times
 
 In general, we create a vector with the combine function **c()**
   
-  ```{r}
+```{r}
 numeric_vector <- c(1, 2.1, -4, 6.8, 2, -1)
-character_vector <- c("Kabul", "India", "Boat", "5", ".")
+character_vector <- c("Kabul", "India", "کشتی", "5", ".")
 boolean_vector <- c(FALSE, TRUE, TRUE, FALSE, TRUE)
 ```
 
-### Vectors Arithmetic
+## Vectors Arithmetic
 
 Element by element operation
 
@@ -137,26 +136,8 @@ A + B
 A / B
 ```
 
-```{r eval=FALSE}
-A * B
-```
 
-
-```{r eval=FALSE}
-B - A
-```
-
-
-```{r eval=FALSE}
-B %% A
-```
-
-
-```{r eval=FALSE}
-B ^ A
-```
-
-### Vector index
+## Vector index
 
 A vector have many characteristics, such as **class**, **length**, and elements. Lenght of a vector is number of elements a vector has, irrespective of its class.
 
@@ -209,36 +190,37 @@ class(A)
 class(B)
 ```
 
-### Matrix index
+## Matrix index
 
 Vectors had one dimension. Matrices have two dimensions. Consistent with number of dimensions, matrix indeces also have two values.
 
 Let's look at matrix A:
   
-  ```{r}
+```{r}
 A
 ```
 
 How can we call value in second column and second row?
   
-  ```{r}
+```{r}
 A[2, 2]
 ```
 
 How can we call all elements of second column?
   
-  ```{r}
+```{r}
 A[, 2]
 ```
 
 How do we call all elements of first row?
-  ```{r}
+
+```{r}
 A[1, ]
 ```
 
 Practice a little bit more with indexing matrices with yourself. It is both very useful and super cool.
 
-### Matrix Arithmetic
+## Matrix Arithmetic
 
 Matrix arithmetic resembles vector arithmetic. Let's look at a few examples to understand.
 
@@ -261,7 +243,7 @@ A * 2
 A * B
 ```
 
-### Joining matrices
+## Joining matrices
 
 There are two ways to join matrices: 
 - **rbind:** add new rows
@@ -277,7 +259,7 @@ In **column bind**, we add one matrix on the right side of another matrix
 
 Let's join matrix A and B, once by row and once by column:
   
-  ```{r}
+```{r}
 A <- matrix(1:9, nrow = 3)
 B <- matrix(11:19, nrow = 3)
 rbind(A, B)
@@ -313,7 +295,7 @@ As data frames can contain multiple types of data, such as numeric, character, l
 str(mtcars)
 ```
 
-### Creating data frame
+## Creating data frame
 
 Data frames can be created in multiple ways. Let's see a few cases.
 
@@ -342,7 +324,7 @@ Afg_major_cities
 read.csv("~/Documents/PRSO/Programs/Data Analysis with R/Day 1/Afg_major_cities.csv", header = TRUE)
 ```
 
-### Data frame index
+## Data frame index
 
 Data frame indeces are largely the same as matrices: we call row number and column number in that order inside "[ ]".
 
@@ -378,7 +360,7 @@ We can also select an element, for example 3rd element of 2nd column, using **$*
 Afg_major_cities$cities[3] # is the same as Afg_major_cities[3, 2]
 ```
 
-### Column and Row Names
+## Column and Row Names
 
 Most data are stored in data frame and it is important to assign appropriate names to columns (and sometiems rows) to help recognize them.
 
@@ -450,7 +432,7 @@ For example:
 2 == 1
 ```
 
-We can use relational operators with vectors too, which output boolean vectors.
+We can use relational operators with vectors too, which **output boolean vectors**.
 
 For example:
 
@@ -460,20 +442,12 @@ B <- c(3, 3, 1)
 A >= B
 ```
 
-**NOTE:** If one vector is shorter, the elements of shorter vector is _recycled_.
+**NOTE:** If one vector is shorter, the elements of shorter vector is _recycled_. For example, the shorter vector has three elements (3,2,1), which will be recycled to five elements (3,2,1,**3,2**).
 
 For example:
 
 ```{r}
 A <- c(1, 4, 2, 5, 2, 2)
-B <- c(3, 3, 1)
-A >= B # Vector B becomes c(3, 3, 1, 3, 3, 1)
+B <- c(3, 2, 1)
+A >= B # Vector B becomes c(3, 2, 1, 3, 2, 1)
 ```
-
-# Logical Operators
-
-- `!`	Logical NOT
-- `&`	Element-wise logical AND
-- `|`	Element-wise logical OR
-
-![](/post/2018-07-12-day-1-introduction-to-r_files/and or.png){width=100%}
